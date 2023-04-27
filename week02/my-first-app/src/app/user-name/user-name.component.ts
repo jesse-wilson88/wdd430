@@ -6,23 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-name.component.css'],
 })
 export class UserNameComponent implements OnInit {
-  allowNewUser = true;
-  userNameCreationStatus = "No user was created";
+  allowNewUser = false;
   userName = '';
-
-  constructor() {
-    setTimeout(() => {
-      this.allowNewUser = false;
-    }, 2000);
-  }
-
-  ngOnInit() {}
   
-  onCreateUserName() {
-    this.userNameCreationStatus = 'User was ceated! User is ' + this.userName;
-  }
-
-  onUpdateUserName(event: any) {
-    this.userName = (<HTMLInputElement>event.target).value;
-  }
+  ngOnInit() {}
 }

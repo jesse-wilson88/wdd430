@@ -9,6 +9,23 @@
       <app-success-alert></app-success-alert>
       <app-warning-alert></app-warning-alert>
       <app-user-name></app-user-name>
+
+      <hr>
+      <!-- <button class="btn btn-primary" (click)="showSecret = !showSecret">Display Toggled Details</button> -->
+      <button class="btn btn-primary" (click)="onToggleDetails()">Display Toggled Details</button>
+      <p *ngIf="showSecret">Secret Password = tuna</p>
+      <!-- <div 
+        *ngFor="let logItem of log"
+        [ngStyle]="{backgroundColor: logItem >= 5 ? 'blue' : 'transparent'}"
+        [ngClass]="{'white-text': logItem >= 5}"
+        >{{ logItem }}
+      </div> -->
+      <div 
+        *ngFor="let logItem of log; let i = index"
+        [ngStyle]="{backgroundColor: i >= 4 ? 'blue' : 'transparent'}"
+        [ngClass]="{'white-text': i >= 4}"
+        >{{ logItem }}
+      </div>
     </div>
   </div>
 </div>

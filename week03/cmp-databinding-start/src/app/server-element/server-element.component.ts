@@ -11,6 +11,9 @@ import {
   AfterViewInit,
   AfterViewChecked,
   OnDestroy,
+  ViewChild,
+  ElementRef,
+  ContentChild,
 } from '@angular/core';
 import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 
@@ -33,6 +36,8 @@ export class ServerElementComponent
 {
   @Input('srvElement') element: { type: string; name: string; content: string };
   @Input() name: string;
+  @ViewChild('heading', { static: true }) header: ElementRef;
+  @ContentChild('contentParagraph', { static: true }) paragraph: ElementRef;
 
   // Look at the console to see what happens here
   constructor() {
@@ -46,6 +51,10 @@ export class ServerElementComponent
 
   ngOnInit() {
     console.log('ngOnInit called!');
+
+    // No content available for the two lines of code below
+    console.log('Text Content: ' + this.header.nativeElement.textContent);
+    console.log('Text Content of Paragraph: ' + this.paragraph.nativeElement.textContent);
   }
 
   ngDoCheck() {
@@ -54,14 +63,20 @@ export class ServerElementComponent
 
   ngAfterContentInit() {
     console.log('ngAfterContentInit called!');
+    console.log(
+      'Text Content of Paragraph: ' + this.paragraph.nativeElement.textContent
+    );
+
   }
 
   ngAfterContentChecked() {
     console.log('ngAfterContentChecked called!');
   }
 
+  // You can check the value of some content with this because it has not been rendered yet.
   ngAfterViewInit() {
     console.log('ngAfterViewInit called!');
+    console.log('textContent: ' + this.header.nativeElement.textContent);
   }
 
   ngAfterViewChecked() {

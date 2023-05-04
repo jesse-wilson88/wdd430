@@ -15,7 +15,6 @@ import {
   ElementRef,
   ContentChild,
 } from '@angular/core';
-import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 
 @Component({
   selector: 'app-server-element',

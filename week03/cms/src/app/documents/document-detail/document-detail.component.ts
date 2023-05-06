@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'cms-document-detail',
   templateUrl: './document-detail.component.html',
-  styleUrls: ['./document-detail.component.css']
+  styleUrls: ['./document-detail.component.css'],
 })
-export class DocumentDetailComponent {
+export class DocumentDetailComponent implements OnInit {
+  constructor() {}
 
+  ngOnInit() {}
 }

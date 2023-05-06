@@ -1,6 +1,7 @@
 <a class="list-group-item clearfix">
-  <div class="">
-    <span class="messageHeader">SendersName</span>
-    <div class="messageText">MessageText</div>
+  <div>
+    <!-- inputMessage comes from message-item.component.ts -->
+    <span class="messageHeader">{{ inputMessage?.sender }}</span>
+    <div class="messageText">{{ inputMessage?.msgText }}</div>
   </div>
 </a>

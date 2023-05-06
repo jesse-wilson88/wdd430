@@ -10,6 +10,7 @@
         <div class="row">
           <div class="col-xs-12">
             <!--Add tag to load the MessageItemComponent-->
+            <!-- inputMessage comes from message-item.component.ts -->
             <cms-message-item
               *ngFor="let messageEl of messages"
               [inputMessage]="messageEl"></cms-message-item>

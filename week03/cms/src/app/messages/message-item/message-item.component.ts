@@ -8,7 +8,10 @@ import { Message } from '../message.model';
   styleUrls: ['./message-item.component.css'],
 })
 export class MessageItemComponent implements OnInit {
-  @Input() Message: Message;
+  // inputMessage can be message. but it needs to be in the following locations
+  // -- message-item.component.html
+  // -- message-list.component.html
+  @Input() inputMessage: Message;
 
   constructor() {}
 

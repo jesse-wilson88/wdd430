@@ -1,3 +1,6 @@
+// Creating a directive is better byb doing it the same way as:
+// better-hightlight.directive.ts
+
 import { Directive, ElementRef, OnInit } from '@angular/core';
 
 @Directive({

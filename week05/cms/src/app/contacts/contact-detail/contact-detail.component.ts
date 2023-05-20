@@ -13,4 +13,6 @@ export class ContactDetailComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  name = 'Brother Wilson';
 }

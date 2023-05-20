@@ -7,7 +7,6 @@ import { MOCKCONTACTS } from './MOCKCONTACTS';
   providedIn: 'root',
 })
 export class ContactService {
-  contactsChanged = new EventEmitter<Contact[]>();
   contactSelectedEvent = new EventEmitter<Contact>();
   private contacts: Contact[] = [];
 
@@ -16,11 +15,12 @@ export class ContactService {
   }
 
   getContacts(): Contact[] {
-    return this.contacts.slice();
+    return this.contacts
+      .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
+      .slice();
   }
 
   getContact(id: string): Contact | null {
-    const contact = this.contacts.find((c) => c.id === id);
-    return contact ? contact : null;
+    return this.contacts.find((c) => c.id === id);
   }
 }

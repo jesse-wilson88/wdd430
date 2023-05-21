@@ -14,5 +14,5 @@ export class ContactDetailComponent implements OnInit {
 
   ngOnInit() {}
 
-  name = 'Brother Wilson';
+  // name = 'Brother Wilson';
 }

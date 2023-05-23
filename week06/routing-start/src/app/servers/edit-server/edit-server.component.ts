@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 import { ServersService } from '../servers.service';
 
 @Component({
   selector: 'app-edit-server',
   templateUrl: './edit-server.component.html',
-  styleUrls: ['./edit-server.component.css']
+  styleUrls: ['./edit-server.component.css'],
 })
 export class EditServerComponent implements OnInit {
-  server: {id: number, name: string, status: string};
+  server: { id: number; name: string; status: string };
   serverName = '';
   serverStatus = '';
+  allowEdit = false;
 
-  constructor(private serversService: ServersService, private route: ActivatedRoute) { }
+  constructor(
+    private serversService: ServersService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     // Only run/update when the component is created. Should not be used
@@ -24,7 +28,9 @@ export class EditServerComponent implements OnInit {
 
     // If there is a chance queryParams will change from the page we are
     // currenly on, this will work
-    this.route.queryParams.subscribe();
+    this.route.queryParams.subscribe((queryParams: Params) => {
+      this.allowEdit = queryParams['allowEdit'] === '1' ? true : false;
+    });
     this.route.fragment.subscribe();
 
     this.server = this.serversService.getServer(1);
@@ -33,7 +39,9 @@ export class EditServerComponent implements OnInit {
   }
 
   onUpdateServer() {
-    this.serversService.updateServer(this.server.id, {name: this.serverName, status: this.serverStatus});
+    this.serversService.updateServer(this.server.id, {
+      name: this.serverName,
+      status: this.serverStatus,
+    });
   }
-
 }

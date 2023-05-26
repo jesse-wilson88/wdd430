@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         return true;
       } else {
         this.router.navigate(['/']);
-        // return false;
+        return false;
       }
     });
   }

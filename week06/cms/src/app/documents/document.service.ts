@@ -17,13 +17,8 @@ export class DocumentService {
   getDocuments(): Document[] {
     return this.documents.slice();
   }
-
+  
   getDocument(id: string) {
     return this.documents.find((document) => document.id === id);
   }
-
-  // getDocument(id: string): Document | null {
-  //   const document = this.documents.find((d) => d.id === id);
-  //   return document ? document : null;
-  // }
 }

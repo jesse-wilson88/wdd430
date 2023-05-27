@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Document } from '../document.model';
+import { DocumentService } from '../document.service';
 
 @Component({
   selector: 'cms-document-detail',
@@ -8,9 +10,20 @@ import { Document } from '../document.model';
   styleUrls: ['./document-detail.component.css'],
 })
 export class DocumentDetailComponent implements OnInit {
-  @Input() document: Document;
+  document: Document;
 
-  constructor() {}
+  constructor(
+    private documentService: DocumentService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      const id = params['id'];
+      this.document = this.documentService.getDocument(id);
+    });
+  }
 }
+
+

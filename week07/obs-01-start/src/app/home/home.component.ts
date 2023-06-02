@@ -38,10 +38,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     // );
 
     // this.firstObsSubscription = customIntervalObservable.subscribe((data) => {
-    this.firstObsSubscription = customIntervalObservable.pipe(filter(data => {
+    this.firstObsSubscription = customIntervalObservable.pipe(filter((data:number) => {
       // data > 0 gives an error but it still works with no issues
       return data > 0;
-    }), map((data: number) => {
+    }), map((data:number) => {
       return 'Round ' + (data + 1);
     })).subscribe(data => {
       console.log(data);

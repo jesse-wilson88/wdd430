@@ -8,7 +8,7 @@ import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
   providedIn: 'root',
 })
 export class DocumentService {
-  documentSelectedEvent = new Subject<Document>();
+  // documentSelectedEvent = new Subject<Document>();
   documentListChangedEvent = new Subject<Document[]>();
   documents: Document[] = [];
   maxDocumentId: number;

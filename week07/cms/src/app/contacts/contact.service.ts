@@ -1,4 +1,5 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { Contact } from './contact.model';
 import { MOCKCONTACTS } from './MOCKCONTACTS';
@@ -7,8 +8,8 @@ import { MOCKCONTACTS } from './MOCKCONTACTS';
   providedIn: 'root',
 })
 export class ContactService {
-  contactSelectedEvent = new EventEmitter<Contact>();
-  contactChangedEvent = new EventEmitter<Contact[]>();
+  contactSelectedEvent = new Subject<Contact>();
+  contactListChangedEvent = new Subject<Contact[]>();
   private contacts: Contact[] = [];
 
   constructor() {
@@ -36,6 +37,6 @@ export class ContactService {
     }
 
     this.contacts.splice(pos, 1);
-    this.contactChangedEvent.emit(this.contacts.slice());
+    this.contactListChangedEvent.next(this.contacts.slice());
   }
 }

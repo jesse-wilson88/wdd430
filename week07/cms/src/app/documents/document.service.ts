@@ -18,30 +18,18 @@ export class DocumentService {
     this.maxDocumentId = this.getMaxId();
   }
 
-  deleteDocument(document: Document) {
-    if (!document) {
-      return;
-    }
-
-    const pos = this.documents.indexOf(document);
-    if (pos < 0) {
-      return;
-    }
-
-    this.documents.splice(pos, 1);
-    const documentsCloneList = this.documents.slice()
-    this.documentListChangedEvent.next(documentsCloneList);
-  }
-
   getDocuments(): Document[] {
+    console.log('Getting the documents.');
     return this.documents.slice();
   }
 
   getDocument(id: string) {
+    console.log('Getting a document.');
     return this.documents.find((document) => document.id === id);
   }
 
   getMaxId(): number {
+    // console.log('Getting the documents maxId.');
     let maxId = 0;
 
     for (const document of this.documents) {
@@ -54,6 +42,7 @@ export class DocumentService {
   }
 
   addDocument(newDocument: Document) {
+    console.log('Adding a document.');
     if (!newDocument) {
       return;
     }
@@ -61,7 +50,41 @@ export class DocumentService {
     this.maxDocumentId++;
     newDocument.id = this.maxDocumentId.toString();
     this.documents.push(newDocument);
-    const documentsCloneList = this.documents.slice();
-    this.documentListChangedEvent.next(documentsCloneList);
+    const documentsListClone = this.documents.slice();
+    this.documentListChangedEvent.next(documentsListClone);
+  }
+
+  updateDocument(originalDocument: Document, newDocument: Document) {
+    console.log('Updating a document.');
+    if (!originalDocument || !newDocument) {
+      return;
+    }
+
+    const pos = this.documents.indexOf(originalDocument);
+    if (pos < 0) {
+      return;
+    }
+
+    newDocument.id = originalDocument.id;
+    this.documents[pos] = newDocument;
+
+    const documentsListClone = this.documents.slice();
+    this.documentListChangedEvent.next(documentsListClone);
+  }
+
+  deleteDocument(document: Document) {
+    console.log('Deleting a document.');
+    if (!document) {
+      return;
+    }
+
+    const pos = this.documents.indexOf(document);
+    if (pos < 0) {
+      return;
+    }
+
+    this.documents.splice(pos, 1);
+    const documentsListClone = this.documents.slice();
+    this.documentListChangedEvent.next(documentsListClone);
   }
 }

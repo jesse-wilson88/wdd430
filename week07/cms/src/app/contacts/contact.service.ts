@@ -8,7 +8,7 @@ import { MOCKCONTACTS } from './MOCKCONTACTS';
   providedIn: 'root',
 })
 export class ContactService {
-  contactSelectedEvent = new Subject<Contact>();
+  // contactSelectedEvent = new Subject<Contact>();
   contactListChangedEvent = new Subject<Contact[]>();
   private contacts: Contact[] = [];
   maxContactId: number;
@@ -19,14 +19,14 @@ export class ContactService {
   }
 
   getContacts(): Contact[] {
-    console.log('Getting the contacts.');
+    // console.log('Getting the contacts.');
     return this.contacts
       .sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0))
       .slice();
   }
 
   getContact(id: string): Contact | null {
-    console.log('Getting a contact.');
+    // console.log('Getting a contact.');
     return this.contacts.find((c) => c.id === id);
   }
 
@@ -45,7 +45,7 @@ export class ContactService {
 
   // Add contact will be called by the ContactEditComponent Save button
   addContact(newContact: Contact) {
-    console.log('Adding a contact.');
+    // console.log('Adding a contact.');
     if (!newContact) {
       return;
     }
@@ -59,7 +59,7 @@ export class ContactService {
 
   // Update contact will be called by the ContactEditComponent Save button
   updateContact(originalContact: Contact, newContact: Contact) {
-    console.log('Updating a contact.');
+    // console.log('Updating a contact.');
     if (!originalContact || !newContact) {
       return;
     }
@@ -78,7 +78,7 @@ export class ContactService {
 
   // Delete contact will be called by the ContactDetailComponent Delete button
   deleteContact(contact: Contact) {
-    console.log('Deleting a contact.');
+    // console.log('Deleting a contact.');
     if (!contact) {
       return;
     }
@@ -89,6 +89,7 @@ export class ContactService {
     }
 
     this.contacts.splice(pos, 1);
-    this.contactListChangedEvent.next(this.contacts.slice());
+    const contactsListClone = this.contacts.slice();
+    this.contactListChangedEvent.next(contactsListClone);
   }
 }

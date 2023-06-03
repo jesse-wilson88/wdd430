@@ -19,12 +19,12 @@ export class DocumentService {
   }
 
   getDocuments(): Document[] {
-    console.log('Getting the documents.');
+    // console.log('Getting the documents.');
     return this.documents.slice();
   }
 
   getDocument(id: string) {
-    console.log('Getting a document.');
+    // console.log('Getting a document.');
     return this.documents.find((document) => document.id === id);
   }
 
@@ -42,7 +42,7 @@ export class DocumentService {
   }
 
   addDocument(newDocument: Document) {
-    console.log('Adding a document.');
+    // console.log('Adding a document.');
     if (!newDocument) {
       return;
     }
@@ -55,7 +55,7 @@ export class DocumentService {
   }
 
   updateDocument(originalDocument: Document, newDocument: Document) {
-    console.log('Updating a document.');
+    // console.log('Updating a document.');
     if (!originalDocument || !newDocument) {
       return;
     }
@@ -73,7 +73,7 @@ export class DocumentService {
   }
 
   deleteDocument(document: Document) {
-    console.log('Deleting a document.');
+    // console.log('Deleting a document.');
     if (!document) {
       return;
     }

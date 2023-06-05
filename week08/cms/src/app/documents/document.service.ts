@@ -8,7 +8,6 @@ import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
   providedIn: 'root',
 })
 export class DocumentService {
-  // documentSelectedEvent = new Subject<Document>();
   documentListChangedEvent = new Subject<Document[]>();
   documents: Document[] = [];
   maxDocumentId: number;
@@ -19,12 +18,12 @@ export class DocumentService {
   }
 
   getDocuments(): Document[] {
-    console.log('Getting all documents.');
+    // console.log('Getting all documents.');
     return this.documents.slice();
   }
 
   getDocument(id: string) {
-    console.log('Getting a document.');
+    // console.log('Getting a document.');
     return this.documents.find((document) => document.id === id);
   }
 
@@ -73,7 +72,7 @@ export class DocumentService {
   }
 
   deleteDocument(document: Document) {
-    console.log('Deleting a document.');
+    // console.log('Deleting a document.');
     if (!document) {
       return;
     }

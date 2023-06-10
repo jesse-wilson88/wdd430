@@ -57,5 +57,7 @@ export class DocumentEditComponent implements OnInit {
     } else {
       this.documentService.addDocument(newDocument)
     }
+    // this.editMode = false;
+    form.reset();
   }
 }

@@ -1,8 +1,8 @@
-input.ng-invalid {
-  border: 1px solid red;
-}
-
-/* This will make the field red if it is invalid & touched */
-/* input.ng-invalid.ng-touched {
+/* input.ng-invalid {
   border: 1px solid red;
 } */
+
+/* This will make the field red if it is invalid & touched */
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}

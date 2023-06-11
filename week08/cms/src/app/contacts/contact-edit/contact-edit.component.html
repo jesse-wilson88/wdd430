@@ -58,7 +58,7 @@
         </div>
       </div>
 
-      <div class="alert alert-danger" *ngIf="!phone.valid && phone.touched">
+      <div class="alert alert-danger" *ngIf="!phone.valid">
         Enter a valid phone number
       </div>
 
@@ -82,8 +82,9 @@
         <div class="form-group">
           <label for="groupList">Group Contacts:</label>
           <div class="alert alert-danger" *ngIf="invalidContact">
-            Contact cannot be added to the group if it is already in the group or is the current contact!
-          </div>   
+            Contact cannot be added to the group if it is already in the group
+            or is the current contact!
+          </div>
           <div
             class="row"
             id="groupList"
@@ -115,7 +116,7 @@
 
       <div
         class="alert alert-danger"
-        *ngIf="!name.valid && name.touched || !email.valid && email.touched"
+        *ngIf="(!name.valid && name.touched) || (!email.valid && email.touched)"
       >
         The Name and Email fields are required.
       </div>

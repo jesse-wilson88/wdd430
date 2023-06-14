@@ -15,7 +15,6 @@ export class PostsService {
     const postData: Post = { title: title, content: content };
     this.http
       .post<{ name: string }>(
-        // This URL is from your 'https://console.firebase.google.com/' account
         'https://ng-complete-guide-76b2f-default-rtdb.firebaseio.com/post.json',
         postData
       )
@@ -32,7 +31,10 @@ export class PostsService {
   fetchPosts() {
     return this.http
       .get<{ [key: string]: Post }>(
-        'https://ng-complete-guide-76b2f-default-rtdb.firebaseio.com/post.json'
+        'https://ng-complete-guide-76b2f-default-rtdb.firebaseio.com/post.json',
+        {
+          headers: new HttpHeaders({ 'Custom-Header': 'Hello' }),
+        }
       )
       .pipe(
         map((responseData) => {

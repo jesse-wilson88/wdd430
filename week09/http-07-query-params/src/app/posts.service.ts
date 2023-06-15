@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
+import {
+  HttpClient,
+  HttpEventType,
+  HttpHeaders,
+  HttpParams,
+} from '@angular/common/http';
+import { map, catchError, tap } from 'rxjs/operators';
 import { Subject, throwError } from 'rxjs';
 
 import { Post } from './post.model';
@@ -11,12 +16,18 @@ export class PostsService {
 
   constructor(private http: HttpClient) {}
 
+  // Get and Post get you an observeable to which we need to subscribe to
+  // actually kick off the request and send it.
   createAndStorePost(title: string, content: string) {
     const postData: Post = { title: title, content: content };
     this.http
       .post<{ name: string }>(
         'https://ng-complete-guide-76b2f-default-rtdb.firebaseio.com/post.json',
-        postData
+        postData,
+        {
+          // observe: 'body'
+          observe: 'response',
+        }
       )
       .subscribe(
         (responseData) => {
@@ -29,11 +40,17 @@ export class PostsService {
   }
 
   fetchPosts() {
+    let searchParams = new HttpParams();
+    searchParams = searchParams.append('print', 'pretty');
+    searchParams = searchParams.append('custom', 'key');
     return this.http
       .get<{ [key: string]: Post }>(
         'https://ng-complete-guide-76b2f-default-rtdb.firebaseio.com/post.json',
         {
           headers: new HttpHeaders({ 'Custom-Header': 'Hello' }),
+          // params: new HttpParams().set('print', 'pretty'),
+          params: searchParams,
+          responseType: 'json',
         }
       )
       .pipe(
@@ -54,8 +71,29 @@ export class PostsService {
   }
 
   deletePosts() {
-    return this.http.delete(
-      'https://ng-complete-guide-76b2f-default-rtdb.firebaseio.com/post.json'
-    );
+    return this.http
+      .delete(
+        'https://ng-complete-guide-76b2f-default-rtdb.firebaseio.com/post.json',
+        {
+          // observe: 'body'
+          // observe: 'response'
+          observe: 'events',
+          // responseType: 'json', // Don't try to use
+          responseType: 'text',
+          // responseType: 'blob',
+        }
+      )
+      .pipe(
+        tap((event) => {
+          console.log(event);
+          if (event.type === HttpEventType.Sent) {
+            // ...
+          }
+
+          if (event.type === HttpEventType.Response) {
+            console.log(event.body);
+          }
+        })
+      );
   }
 }

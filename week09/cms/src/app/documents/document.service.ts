@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Document } from './document.model';
 import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
@@ -12,13 +14,31 @@ export class DocumentService {
   documents: Document[] = [];
   maxDocumentId: number;
 
-  constructor() {
-    this.documents = MOCKDOCUMENTS;
+  constructor(private http: HttpClient) {
+    // this.documents = MOCKDOCUMENTS;
+    this.getDocuments();
     this.maxDocumentId = this.getMaxId();
   }
 
-  getDocuments(): Document[] {
-    return this.documents.slice();
+  getDocuments() {
+    // return this.documents.slice();
+    // console.log("Getting the documents!")
+    return (
+      this.http
+        .get<Document[]>(
+          'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/documents.json'
+        )
+        .subscribe(
+          (documents: Document[]) => {
+            this.documents = documents.sort();
+            // this.maxDocumentId = this.getMaxId();
+            this.documents.sort((a, b) => a.name > b.name ? 1 : b.name ? -1 : 0)
+            this.documentListChangedEvent.next(this.documents.slice());
+        }),
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
   getDocument(id: string) {

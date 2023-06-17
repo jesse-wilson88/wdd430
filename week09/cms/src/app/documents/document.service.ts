@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 
 import { Document } from './document.model';
-import { MaxValidator } from '@angular/forms';
 // import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
 
 @Injectable({
@@ -23,17 +22,14 @@ export class DocumentService {
 
   getDocuments() {
     // return this.documents.slice();
-    // console.log("Getting the documents!")
     return (
-      this.http
-        .get<Document[]>(
+      this.http.get<Document[]>(
           'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/documents.json'
-        )
-        .subscribe((documents: Document[]) => {
+        ).subscribe((documents: Document[]) => {
           this.documents = documents;
           // this.maxDocumentId = this.getMaxId();
           this.documents.sort((a, b) =>
-            a.name > b.name ? 1 : b.name ? -1 : 0
+            a.name > b.name ? 1 : b.name > a.name ? -1 : 0
           );
           this.documentListChangedEvent.next(this.documents.slice());
         }),
@@ -47,17 +43,17 @@ export class DocumentService {
     return this.documents.find((document) => document.id === id);
   }
 
-getMaxId(): number {
-  let maxId = 0;
+  getMaxId(): number {
+    let maxId = 0;
 
-  for (const document of this.documents) {
-    const currentId = Number(document.id);
-    if (currentId > maxId) {
-      maxId = currentId;
+    for (const document of this.documents) {
+      const currentId = Number(document.id);
+      if (currentId > maxId) {
+        maxId = currentId;
+      }
     }
+    return maxId;
   }
-  return maxId;
-}
 
   addDocument(newDocument: Document) {
     if (!newDocument) {
@@ -67,12 +63,13 @@ getMaxId(): number {
     this.maxDocumentId = this.getMaxId();
 
     this.maxDocumentId++;
-    console.log(this.maxDocumentId);
+    // console.log(this.maxDocumentId);
     newDocument.id = this.maxDocumentId.toString();
     this.documents.push(newDocument);
     // const documentsListClone = this.documents.slice();
     // this.documentListChangedEvent.next(documentsListClone);
     this.storeDocuments();
+    this.documents.sort((a, b) => (a.name > b.name ? 1 : b.name ? -1 : 0));
   }
 
   updateDocument(originalDocument: Document, newDocument: Document) {

@@ -3,9 +3,7 @@ import { Subject, map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Message } from './message.model';
-import { Contact } from '../contacts/contact.model';
-import { ContactService } from '../contacts/contact.service';
-import { DataStorageService } from '../shared/data-Storage.service';
+// import { DataStorageService } from '../shared/data-Storage.service';
 // import { MOCKMESSAGES } from './MOCKMESSAGES';
 
 @Injectable({
@@ -16,56 +14,47 @@ export class MessageService {
   messages: Message[] = [];
   maxMessageId: number;
 
-  constructor(
-    private http: HttpClient,
-    // private dataStorageService: DataStorageService
-  ) {
+  constructor(private http: HttpClient) {
     // this.messages = MOCKMESSAGES;
     // this.messages = this.messages;
     this.getMessages();
   }
 
+  setMessages(messages: Message[]) {
+    this.messages = messages;
+    this.messageChangedEvent.next(this.messages.slice());
+  }
+
   getMessages(): Message[] {
     // return this.messages.slice();
-      this.http
-        .get<Message[]>(
-          'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/messages.json'
-        )
-        .pipe(
-          map((responseData) => {
-            const messages: Message[] = [];
-            for (const key in responseData) {
-              if (responseData.hasOwnProperty(key)) {
-                messages.push({ ...responseData[key], id: key });
-              }
+    this.http
+      .get<Message[]>(
+        'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/messages.json'
+      )
+      .pipe(
+        map((responseData) => {
+          const messages: Message[] = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              messages.push({ ...responseData[key], id: key });
             }
-            return messages;
-          })
-        )
-        //     .subscribe((messages: Message[]) => {
-        //       this.messages = messages;
-        //       this.maxMessageId = this.getMaxId();
-
-        // this.messages.sort((a, b) => (a.id > b.id ? 1 : b.id > a.id ? -1 : 0));
-        //       this.messageChangedEvent.next(this.messages.slice());
-        //     }),
-        //     (error: any) => {
-        //       console.log('Error: ', error);
-        //     };
-        // return this.messages.slice();
-        .subscribe({
-          next: (n) => {
-            this.maxMessageId = this.getMaxId();
-            this.messages = n;
-            this.messages.sort((a: Message, b: Message) => +a.id - +b.id);
-            this.messageChangedEvent.next(this.messages.slice());
-          },
-          error: (e) => console.error(e),
-          complete: () => {
-            this.messages;
-          },
-        });
-      return this.messages;
+          }
+          return messages;
+        })
+      )
+      .subscribe({
+        next: (n) => {
+          this.maxMessageId = this.getMaxId();
+          this.messages = n;
+          this.messages.sort((a: Message, b: Message) => +a.id - +b.id);
+          this.messageChangedEvent.next(this.messages.slice());
+        },
+        error: (e) => console.error(e),
+        complete: () => {
+          this.messages;
+        },
+      });
+    return this.messages;
   }
 
   getMessage(id: string): Message {
@@ -116,24 +105,4 @@ export class MessageService {
         this.messageChangedEvent.next(cloneMessages);
       });
   }
-
-  // fetchMessages() {
-  //   this.http
-  //     .get<Message[]>(
-  //       'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/documents.json'
-  //     )
-  //     .pipe(
-  //       map((messages) => {
-  //         return messages.map((message) => {
-  //           return {
-  //             ...message,
-  //             sender: message.sender ? String(message.sender) : '',
-  //           };
-  //         });
-  //       })
-  //     )
-  //     .subscribe((messages) => {
-  //       this.messageServices.setMessages(messages);
-  //     });
-  // }
 }

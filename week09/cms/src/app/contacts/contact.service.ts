@@ -12,7 +12,6 @@ export class ContactService {
   contactListChangedEvent = new Subject<Contact[]>();
   private contacts: Contact[] = [];
   maxContactId: number;
-  maxId: number = 0;
 
   constructor(private http: HttpClient) {
     // this.contacts = MOCKCONTACTS;
@@ -20,8 +19,9 @@ export class ContactService {
     this.getContacts();
   }
 
-  getContacts(): Contact[] {
+  getContacts() {
     // console.log('Getting all contacts.');
+    return (
       this.http
         .get<Contact[]>(
           'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/contacts.json'
@@ -35,8 +35,8 @@ export class ContactService {
         }),
       (error: any) => {
         console.log('Error: ', error);
-        };
-    return this.contacts.slice();
+      }
+    );
   }
 
   getContact(id: string): Contact | null {
@@ -46,14 +46,15 @@ export class ContactService {
 
   getMaxId(): number {
     // console.log('Getting the contacts maxId.');
+    let maxId = 0;
 
     for (const contact of this.contacts) {
       const currentId = Number(contact.id);
-      if (currentId > this.maxId) {
-        this.maxId = currentId;
+      if (currentId > maxId) {
+        maxId = currentId;
       }
     }
-    return this.maxId;
+    return maxId;
   }
 
   // Add contact will be called by the ContactEditComponent Save button

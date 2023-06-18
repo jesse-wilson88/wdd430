@@ -16,7 +16,7 @@ export class ContactsResolverService implements Resolve<Contact[]> {
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Contact[] | Observable<Contact[]> | Promise<Contact[]> {
+  ): Observable<Contact[]> | Promise<Contact[]> | Contact[] {
     const contacts = this.contactService.getContacts();
     if (contacts.length === 0) {
       return this.contactService.getContacts();

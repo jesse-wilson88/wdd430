@@ -9,7 +9,6 @@ import { DocumentDetailComponent } from './documents/document-detail/document-de
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { ContactDetailComponent } from './contacts/contact-detail/contact-detail.component';
 import { MessagesResolverService } from './messages/messages-resolver.service';
-import { ContactsResolverService } from './contacts/contacts-resolver.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/documents', pathMatch: 'full' },
@@ -32,20 +31,14 @@ const appRoutes: Routes = [
     component: ContactsComponent,
     children: [
       { path: 'new', component: ContactEditComponent },
-      {
-        path: ':id',
-        component: ContactDetailComponent,
-        resolve: [ContactsResolverService],
-      },
+      { path: ':id', component: ContactDetailComponent },
       { path: ':id/edit', component: ContactEditComponent },
     ],
   },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(appRoutes)
-  ],
+  imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

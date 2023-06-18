@@ -25,9 +25,9 @@ export class ContactService {
       .slice();
   }
 
-  getContact(id: string): Contact | null {
+  getContact(id: string) {
     // console.log('Getting a contact.');
-    return this.contacts.find((c) => c.id === id);
+    return this.contacts.find((contact) => contact.id === id);
   }
 
   getMaxId(): number {
@@ -77,7 +77,7 @@ export class ContactService {
   }
 
   // Delete contact will be called by the ContactDetailComponent Delete button
-  deleteContact(contact: Contact) {
+  deleteContact(contact: Contact): void {
     // console.log('Deleting a contact.');
     if (!contact) {
       return;

@@ -3,8 +3,6 @@ import {
   OnInit,
   ElementRef,
   ViewChild,
-  Output,
-  EventEmitter,
 } from '@angular/core';
 
 import { Message } from '../message.model';
@@ -19,7 +17,7 @@ export class MessageEditComponent implements OnInit {
   @ViewChild('subject') subject: ElementRef;
   @ViewChild('msgText') msgText: ElementRef;
   // currentSender = 'Brother Wilson';
-  currentSender = '99';
+  currentSender = '19';
 
   constructor(private messageService: MessageService) {}
 
@@ -30,7 +28,7 @@ export class MessageEditComponent implements OnInit {
     const msgTextValue = this.msgText.nativeElement.value;
 
     const message = new Message(
-      '',
+      this.messageService.getMaxId().toString(),
       subjectValue,
       msgTextValue,
       this.currentSender

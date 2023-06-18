@@ -25,7 +25,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
           this.contacts = contacts;
         } else {
           // Handle the error case appropriately
-          console.error('Error retrieving documents:', contacts);
+          console.error('Error retrieving documents: ', contacts);
         }
       }
     );

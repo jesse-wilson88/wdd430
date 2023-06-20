@@ -12,24 +12,23 @@ import { ContactService } from '../contact.service';
 export class ContactListComponent implements OnInit, OnDestroy {
   contacts: Contact[] = [];
   term: String;
-  private subscription: Subscription;
+  subscription: Subscription;
 
-  constructor(private contactSevice: ContactService) {
-    // this.contacts = this.contactSevice.getContacts();
-  }
+  constructor(private contactSevice: ContactService) {}
 
   ngOnInit() {
+    this.contacts = this.contactSevice.getContacts();
     this.subscription = this.contactSevice.contactListChangedEvent.subscribe(
       (contacts: Contact[]) => {
-        if (Array.isArray(contacts)) {
-          this.contacts = contacts;
-        } else {
-          // Handle the error case appropriately
-          console.error('Error retrieving documents: ', contacts);
-        }
+        // if (Array.isArray(contacts)) {
+        this.contacts = contacts;
+        // } else {
+        //   // Handle the error case appropriately
+        //   console.error('Error retrieving documents: ', contacts);
+        // }
       }
     );
-    this.contactSevice.getContacts();
+    // this.contactSevice.getContacts();
   }
 
   ngOnDestroy(): void {

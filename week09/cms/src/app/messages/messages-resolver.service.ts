@@ -5,7 +5,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import {map} from 'rxjs/operators'
+import { map } from 'rxjs/operators';
 
 import { Message } from './message.model';
 import { MessageService } from './message.service';
@@ -31,24 +31,25 @@ export class MessagesResolverService implements Resolve<Message[]> {
   //   );
   // }
 
-  // resolve(
-  //   route: ActivatedRouteSnapshot,
-  //   state: RouterStateSnapshot
-  // ): Message[] | Observable<Message[]> | Promise<Message[]> {
-  //   const messages = this.messageService.getMessages();
-  //   // console.log('Messages length: ', messages.length);
-  //   if (messages.length === 0) {
-  //     return this.messageService.getMessages();
-  //   } else {
-  //     return messages;
-  //   }
-  // }
-
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Message[] | Observable<Message[]> | Promise<Message[]> {
-    return this.messageService.getMessages();
-    // return this.dataStorageService.fetchMessages();
+    // const messages = this.messageService.getMessages();
+    const messages: Message[] = [];
+    // console.log('Messages length: ', messages.length);
+    if (messages.length === 0) {
+      return this.messageService.getMessages();
+    } else {
+      return messages;
+    }
   }
+
+  // resolve(
+  //   route: ActivatedRouteSnapshot,
+  //   state: RouterStateSnapshot
+  // ): Message[] | Observable<Message[]> | Promise<Message[]> {
+  //   return this.messageService.getMessages();
+  //   // return this.dataStorageService.fetchMessages();
+  // }
 }

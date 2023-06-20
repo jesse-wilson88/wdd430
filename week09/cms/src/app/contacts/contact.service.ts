@@ -10,7 +10,7 @@ import { Contact } from './contact.model';
 })
 export class ContactService {
   contactListChangedEvent = new Subject<Contact[]>();
-  private contacts: Contact[] = [];
+  contacts: Contact[] = [];
   maxContactId: number;
 
   constructor(private http: HttpClient) {
@@ -19,24 +19,41 @@ export class ContactService {
     this.getContacts();
   }
 
-  getContacts() {
+  getContacts(): Contact[] {
     // console.log('Getting all contacts.');
-    return (
-      this.http
-        .get<Contact[]>(
-          'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/contacts.json'
-        )
-        .subscribe((contacts: Contact[]) => {
-          this.contacts = contacts;
+    // return (
+    this.http
+      .get<Contact[]>(
+        'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/contacts.json'
+      )
+      //     .subscribe((contacts: Contact[]) => {
+      //       this.maxContactId = this.getMaxId();
+      //       this.contacts = contacts;
+      //       this.contacts.sort((a, b) =>
+      //         a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+      //       );
+      //       this.contactListChangedEvent.next(this.contacts.slice());
+      //     }),
+      //   (error: any) => {
+      //     console.log('Error: ', error);
+      //   }
+      // // );
+      // return this.contacts.slice();
+      .subscribe({
+        next: (n) => {
+          this.contacts = n;
+          this.maxContactId = this.getMaxId();
           this.contacts.sort((a, b) =>
             a.name > b.name ? 1 : b.name > a.name ? -1 : 0
           );
+        },
+        error: (e) => console.error(e),
+        complete: () => {
+          // this.contacts;
           this.contactListChangedEvent.next(this.contacts.slice());
-        }),
-      (error: any) => {
-        console.log('Error: ', error);
-      }
-    );
+        },
+      });
+    return this.contacts.slice();
   }
 
   getContact(id: string): Contact | null {

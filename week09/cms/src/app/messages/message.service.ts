@@ -31,31 +31,30 @@ export class MessageService {
       .get<Message[]>(
         'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/messages.json'
       )
-      // .pipe(
-      //   map((responseData) => {
-      //     const messages: Message[] = [];
-      //     for (const key in responseData) {
-      //       if (responseData.hasOwnProperty(key)) {
-      //         messages.push({ ...responseData[key], id: key });
-      //       }
-      //     }
-      //     return messages;
-      //   })
-      // )
+      .pipe(
+        map((responseData) => {
+          const messages: Message[] = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              messages.push({ ...responseData[key], id: key });
+            }
+          }
+          return messages;
+        })
+      )
       .subscribe({
         next: (n) => {
-          this.messages = n;
           this.maxMessageId = this.getMaxId();
-          // this.messages.sort((a: Message, b: Message) => +a.id - +b.id);
-          // this.messageChangedEvent.next(this.messages.slice());
+          this.messages = n;
+          this.messages.sort((a: Message, b: Message) => +a.id - +b.id);
+          this.messageChangedEvent.next(this.messages.slice());
         },
         error: (e) => console.error(e),
         complete: () => {
-          // this.messages;
-          this.messageChangedEvent.next(this.messages.slice());
+          this.messages;
         },
       });
-    return this.messages.slice();
+    return this.messages;
   }
 
   getMessage(id: string): Message {

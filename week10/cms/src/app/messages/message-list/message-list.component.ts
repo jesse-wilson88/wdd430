@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { Contact } from 'src/app/contacts/contact.model';
-import { ContactService } from 'src/app/contacts/contact.service';
 import { Message } from '../message.model';
 import { MessageService } from '../message.service';
 
@@ -19,10 +17,6 @@ export class MessageListComponent implements OnInit, OnDestroy {
 
   // Lifecycle hook/method
   ngOnInit() {
-    // this.messages = this.messageService.getMessages();
-    // this.messageService.messageChangedEvent.subscribe((messages: Message[]) => {
-    //   this.messages = messages;
-    // });
     this.subscription = this.messageService.messageChangedEvent.subscribe(
       (messages: Message[]) => {
         if (Array.isArray(messages)) {

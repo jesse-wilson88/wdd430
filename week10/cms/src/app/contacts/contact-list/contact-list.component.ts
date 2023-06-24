@@ -14,9 +14,7 @@ export class ContactListComponent implements OnInit, OnDestroy {
   term: String;
   private subscription: Subscription;
 
-  constructor(private contactSevice: ContactService) {
-    // this.contacts = this.contactSevice.getContacts();
-  }
+  constructor(private contactSevice: ContactService) {}
 
   ngOnInit() {
     this.subscription = this.contactSevice.contactListChangedEvent.subscribe(

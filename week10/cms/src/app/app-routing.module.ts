@@ -8,7 +8,6 @@ import { DocumentEditComponent } from './documents/document-edit/document-edit.c
 import { DocumentDetailComponent } from './documents/document-detail/document-detail.component';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { ContactDetailComponent } from './contacts/contact-detail/contact-detail.component';
-// import { MessagesResolverService } from './messages/messages-resolver.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/documents', pathMatch: 'full' },
@@ -24,7 +23,6 @@ const appRoutes: Routes = [
   {
     path: 'messages',
     component: MessageListComponent,
-    // resolve: [MessagesResolverService],
   },
   {
     path: 'contacts',

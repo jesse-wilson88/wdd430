@@ -112,10 +112,7 @@ export class DocumentService {
 
   storeDocuments() {
     const documents = JSON.stringify(this.documents);
-    const headers = new HttpHeaders().set(
-      'Content-Type',
-      'application/Json'
-    );
+    const headers = new HttpHeaders().set('Content-Type', 'application/Json');
     this.http
       .put(
         'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/documents.json',

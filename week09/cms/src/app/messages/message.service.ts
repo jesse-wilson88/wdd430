@@ -3,8 +3,7 @@ import { Subject, map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Message } from './message.model';
-// import { DataStorageService } from '../shared/data-Storage.service';
-// import { MOCKMESSAGES } from './MOCKMESSAGES';
+import { ContactService } from '../contacts/contact.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +13,10 @@ export class MessageService {
   messages: Message[] = [];
   maxMessageId: number;
 
-  constructor(private http: HttpClient) {
-    // this.messages = MOCKMESSAGES;
-    // this.messages = this.messages;
-    this.getMessages();
-  }
+  constructor(
+    private http: HttpClient,
+    private contactService: ContactService
+  ) {}
 
   setMessages(messages: Message[]) {
     this.messages = messages;
@@ -26,7 +24,6 @@ export class MessageService {
   }
 
   getMessages(): Message[] {
-    // return this.messages.slice();
     this.http
       .get<Message[]>(
         'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/messages.json'
@@ -74,11 +71,7 @@ export class MessageService {
   }
 
   addMessage(newMessage: Message) {
-    // console.log('Trying to add a message!');
-    // this.messages.push(newMessage);
-    // this.messageChangedEvent.next(this.messages.slice());
     if (!newMessage) {
-      // console.log('No messages found!');
       return;
     }
 

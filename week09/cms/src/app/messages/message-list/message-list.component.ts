@@ -17,10 +17,6 @@ export class MessageListComponent implements OnInit, OnDestroy {
 
   // Lifecycle hook/method
   ngOnInit() {
-    // this.messages = this.messageService.getMessages();
-    // this.messageService.messageChangedEvent.subscribe((messages: Message[]) => {
-    //   this.messages = messages;
-    // });
     this.subscription = this.messageService.messageChangedEvent.subscribe(
       (messages: Message[]) => {
         if (Array.isArray(messages)) {

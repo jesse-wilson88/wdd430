@@ -3,6 +3,7 @@ import { Subject, map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Message } from './message.model';
+import { ContactService } from '../contacts/contact.service';
 // import { DataStorageService } from '../shared/data-Storage.service';
 // import { MOCKMESSAGES } from './MOCKMESSAGES';
 
@@ -14,10 +15,10 @@ export class MessageService {
   messages: Message[] = [];
   maxMessageId: number;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private contactService: ContactService) {
     // this.messages = MOCKMESSAGES;
     // this.messages = this.messages;
-    this.getMessages();
+    // this.getMessages();
   }
 
   setMessages(messages: Message[]) {
@@ -31,31 +32,30 @@ export class MessageService {
       .get<Message[]>(
         'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/messages.json'
       )
-      // .pipe(
-      //   map((responseData) => {
-      //     const messages: Message[] = [];
-      //     for (const key in responseData) {
-      //       if (responseData.hasOwnProperty(key)) {
-      //         messages.push({ ...responseData[key], id: key });
-      //       }
-      //     }
-      //     return messages;
-      //   })
-      // )
+      .pipe(
+        map((responseData) => {
+          const messages: Message[] = [];
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              messages.push({ ...responseData[key], id: key });
+            }
+          }
+          return messages;
+        })
+      )
       .subscribe({
         next: (n) => {
-          this.messages = n;
           this.maxMessageId = this.getMaxId();
-          // this.messages.sort((a: Message, b: Message) => +a.id - +b.id);
-          // this.messageChangedEvent.next(this.messages.slice());
+          this.messages = n;
+          this.messages.sort((a: Message, b: Message) => +a.id - +b.id);
+          this.messageChangedEvent.next(this.messages.slice());
         },
         error: (e) => console.error(e),
         complete: () => {
-          // this.messages;
-          this.messageChangedEvent.next(this.messages.slice());
+          this.messages;
         },
       });
-    return this.messages.slice();
+    return this.messages;
   }
 
   getMessage(id: string): Message {

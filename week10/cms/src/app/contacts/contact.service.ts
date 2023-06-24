@@ -10,7 +10,7 @@ import { Contact } from './contact.model';
 })
 export class ContactService {
   contactListChangedEvent = new Subject<Contact[]>();
-  contacts: Contact[] = [];
+  private contacts: Contact[] = [];
   maxContactId: number;
 
   constructor(private http: HttpClient) {
@@ -19,41 +19,24 @@ export class ContactService {
     this.getContacts();
   }
 
-  getContacts(): Contact[] {
+  getContacts() {
     // console.log('Getting all contacts.');
-    // return (
-    this.http
-      .get<Contact[]>(
-        'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/contacts.json'
-      )
-      //     .subscribe((contacts: Contact[]) => {
-      //       this.maxContactId = this.getMaxId();
-      //       this.contacts = contacts;
-      //       this.contacts.sort((a, b) =>
-      //         a.name > b.name ? 1 : b.name > a.name ? -1 : 0
-      //       );
-      //       this.contactListChangedEvent.next(this.contacts.slice());
-      //     }),
-      //   (error: any) => {
-      //     console.log('Error: ', error);
-      //   }
-      // // );
-      // return this.contacts.slice();
-      .subscribe({
-        next: (n) => {
-          this.contacts = n;
-          this.maxContactId = this.getMaxId();
+    return (
+      this.http
+        .get<Contact[]>(
+          'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/contacts.json'
+        )
+        .subscribe((contacts: Contact[]) => {
+          this.contacts = contacts;
           this.contacts.sort((a, b) =>
             a.name > b.name ? 1 : b.name > a.name ? -1 : 0
           );
-        },
-        error: (e) => console.error(e),
-        complete: () => {
-          // this.contacts;
           this.contactListChangedEvent.next(this.contacts.slice());
-        },
-      });
-    return this.contacts.slice();
+        }),
+      (error: any) => {
+        console.log('Error: ', error);
+      }
+    );
   }
 
   getContact(id: string): Contact | null {
@@ -66,7 +49,7 @@ export class ContactService {
     let maxId = 0;
 
     for (const contact of this.contacts) {
-      const currentId = Number(contact?.id);
+      const currentId = Number(contact.id);
       if (currentId > maxId) {
         maxId = currentId;
       }

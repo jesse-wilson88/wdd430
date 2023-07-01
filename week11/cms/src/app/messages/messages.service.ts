@@ -3,19 +3,19 @@ import { Subject, map } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Message } from './message.model';
-import { ContactService } from '../contacts/contact.service';
+import { ContactsService } from '../contacts/contacts.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MessageService {
+export class MessagesService {
   messageChangedEvent = new Subject<Message[]>();
   messages: Message[] = [];
   maxMessageId: number;
 
   constructor(
     private http: HttpClient,
-    private contactService: ContactService
+    private contactsService: ContactsService
   ) {}
 
   setMessages(messages: Message[]) {
@@ -26,7 +26,8 @@ export class MessageService {
   getMessages(): Message[] {
     this.http
       .get<Message[]>(
-        'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/messages.json'
+        // 'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/messages.json'
+        'http://127.0.0.1:3000/messages',
       )
       .pipe(
         map((responseData) => {
@@ -89,7 +90,8 @@ export class MessageService {
     const headers = new HttpHeaders().set('Content-Type', 'application/Json');
     this.http
       .put(
-        'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/messages.json',
+        // 'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/messages.json',
+        'http://127.0.0.1:3000/messages',
         messages,
         { headers }
       )

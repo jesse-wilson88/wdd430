@@ -8,7 +8,7 @@ import { Document } from './document.model';
 @Injectable({
   providedIn: 'root',
 })
-export class DocumentService {
+export class DocumentsService {
   documentListChangedEvent = new Subject<Document[]>();
   documents: Document[] = [];
   maxDocumentId: number;
@@ -25,7 +25,8 @@ export class DocumentService {
     return (
       this.http
         .get<Document[]>(
-          'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/documents.json'
+          // 'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/documents.json'
+          'http://localhost:3000/documents'
         )
         .subscribe((documents: Document[]) => {
           this.documents = documents;
@@ -115,7 +116,8 @@ export class DocumentService {
     const headers = new HttpHeaders().set('Content-Type', 'application/Json');
     this.http
       .put(
-        'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/documents.json',
+        // 'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/documents.json',
+        'http://127.0.0.1:3000/documents',
         documents,
         { headers }
       )

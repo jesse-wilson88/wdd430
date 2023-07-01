@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { Contact } from '../contact.model';
-import { ContactService } from '../contact.service';
+import { ContactsService } from '../contacts.service';
 
 @Component({
   selector: 'cms-contact-edit',
@@ -19,7 +19,7 @@ export class ContactEditComponent implements OnInit {
   invalidContact = false;
 
   constructor(
-    private contactService: ContactService,
+    private contactsService: ContactsService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
@@ -33,7 +33,7 @@ export class ContactEditComponent implements OnInit {
         return;
       }
 
-      this.originalContact = this.contactService.getContact(this.id);
+      this.originalContact = this.contactsService.getContact(this.id);
 
       if (!this.originalContact) {
         return;
@@ -109,9 +109,9 @@ export class ContactEditComponent implements OnInit {
     );
 
     if (this.editMode) {
-      this.contactService.updateContact(this.originalContact, newContact);
+      this.contactsService.updateContact(this.originalContact, newContact);
     } else {
-      this.contactService.addContact(newContact);
+      this.contactsService.addContact(newContact);
     }
 
     this.router.navigate(['/contacts']);

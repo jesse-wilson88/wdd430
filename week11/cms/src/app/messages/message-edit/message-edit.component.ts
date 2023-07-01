@@ -8,7 +8,8 @@ import {
 } from '@angular/core';
 
 import { Message } from '../message.model';
-import { MessageService } from '../message.service';
+import { MessagesService } from '../messages.service';
+import { Contact } from 'src/app/contacts/contact.model';
 
 @Component({
   selector: 'cms-message-edit',
@@ -19,9 +20,10 @@ export class MessageEditComponent implements OnInit {
   @ViewChild('subject') subject: ElementRef;
   @ViewChild('msgText') msgText: ElementRef;
   // currentSender = 'Brother Wilson';
-  currentSender = '19';
+  // currentSender = '19';
+  currentSender: Contact;
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messagesService: MessagesService) {}
 
   ngOnInit() {}
 
@@ -36,7 +38,7 @@ export class MessageEditComponent implements OnInit {
       this.currentSender
     );
 
-    this.messageService.addMessage(message);
+    this.messagesService.addMessage(message);
 
     this.onClear();
   }

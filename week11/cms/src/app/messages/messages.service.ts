@@ -25,10 +25,7 @@ export class MessagesService {
 
   getMessages(): Message[] {
     this.http
-      .get<Message[]>(
-        // 'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/messages.json'
-        'http://127.0.0.1:3000/messages',
-      )
+      .get<Message[]>('http://127.0.0.1:3000/messages')
       .pipe(
         map((responseData) => {
           const messages: Message[] = [];
@@ -52,6 +49,10 @@ export class MessagesService {
           this.messages;
         },
       });
+    // .subscribe((responseData) => {
+    //   this.messages = responseData;
+    //   this.sortAndSend();
+    // });
     return this.messages;
   }
 
@@ -82,22 +83,30 @@ export class MessagesService {
     newMessage.id = this.maxMessageId.toString();
     this.messages.push(newMessage);
 
-    this.storeMessages();
+    // this.storeMessages();
   }
 
-  storeMessages() {
-    const messages = JSON.stringify(this.messages);
-    const headers = new HttpHeaders().set('Content-Type', 'application/Json');
-    this.http
-      .put(
-        // 'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/messages.json',
-        'http://127.0.0.1:3000/messages',
-        messages,
-        { headers }
-      )
-      .subscribe(() => {
-        const cloneMessages = this.messages.slice();
-        this.messageChangedEvent.next(cloneMessages);
-      });
-  }
+  // sortAndSend() {
+  //   // console.log('Sorting...');
+  //   this.messages.sort((a, b) =>
+  //     a.id > b.id ? 1 : b.id > a.id ? -1 : 0
+  //   );
+  //   this.messageChangedEvent.next(this.messages.slice());
+  // }
+
+  // storeMessages() {
+  //   const messages = JSON.stringify(this.messages);
+  //   const headers = new HttpHeaders().set('Content-Type', 'application/Json');
+  //   this.http
+  //     .put(
+  //       // 'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/messages.json',
+  //       'http://127.0.0.1:3000/messages',
+  //       messages,
+  //       { headers }
+  //     )
+  //     .subscribe(() => {
+  //       const cloneMessages = this.messages.slice();
+  //       this.messageChangedEvent.next(cloneMessages);
+  //     });
+  // }
 }

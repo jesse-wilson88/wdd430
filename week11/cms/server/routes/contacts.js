@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var SequenceGenerator = require("./sequenceGenerator");
 
-let contacts = [];
+// let contacts = [];
 
 const Contact = require("../models/contact");
 

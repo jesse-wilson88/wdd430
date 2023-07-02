@@ -13,10 +13,10 @@ export class ContactsService {
   contacts: Contact[] = [];
   contact: Contact;
   maxContactId: number;
-  loadedContacts: Contact[];
+  // loadedContacts: Contact[];
 
   constructor(private http: HttpClient) {
-    this.getContacts();
+    // this.getContacts();
   }
 
   getContacts(): Contact[] {
@@ -34,7 +34,7 @@ export class ContactsService {
       )
       .subscribe((responseData) => {
         this.contacts = responseData;
-        console.log('Response: ' + this.contacts);
+        // console.log('Response: ' + this.contacts);
         this.sortAndSend();
       }),
       (error: any) => {
@@ -78,27 +78,51 @@ export class ContactsService {
   //   );
   // }
 
-  getContact(id: string): Contact {
-    // this.http
-    //   .get<{ message: string; contact: Contact }>(
-    //     `http://127.0.0.1:3000/contacts/${id}`
-    //   )
-    //   .pipe(
-    //     map((responseData) => {
-    //       const contact: Contact = responseData.contact;
-    //       return contact;
-    //     })
-    //   )
-    //   .subscribe({
-    //     next: (n) => {
-    //       this.contact = n;
-    //       console.log('N: ' + n);
-    //     },
-    //     error: (e) => console.error(e),
-    //   });
-    // return this.contact;
+  // getContact(id: string): Contact {
+  //   // this.http
+  //   //   .get<{ message: string; contact: Contact }>(
+  //   //     `http://127.0.0.1:3000/contacts/${id}`
+  //   //   )
+  //   //   .pipe(
+  //   //     map((responseData) => {
+  //   //       const contact: Contact = responseData.contact;
+  //   //       return contact;
+  //   //     })
+  //   //   )
+  //   //   .subscribe({
+  //   //     next: (n) => {
+  //   //       this.contact = n;
+  //   //       console.log('N: ' + n);
+  //   //     },
+  //   //     error: (e) => console.error(e),
+  //   //   });
+  //   // return this.contact;
+  // }
+
+  // getContact(id: string): Contact {
+  //   return this.contacts.find((contact) => contact.id === id);
+  // }
+
+  getContactId(id: string) {
+    return this.http.get<{ message: string; contact: Contact }>(
+      `http://127.0.0.1:3000/contacts/${id}`
+    );
+  }
+
+  getContact(id: string) {
     return this.contacts.find((contact) => contact.id === id);
   }
+
+  // getContact(id: string): Contact {
+  //   this.http
+  //     .get<{ message: string; contact: Contact }>(
+  //       'http://localhost:3000/contacts/' + id
+  //     )
+  //     .subscribe((result) => {
+  //       this.contact = result.contact;
+  //     });
+  //   return this.contact;
+  // }
 
   getMaxId(): number {
     // console.log('Getting the contacts maxId.');

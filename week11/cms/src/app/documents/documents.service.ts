@@ -11,35 +11,26 @@ import { Document } from './document.model';
 export class DocumentsService {
   documentListChangedEvent = new Subject<Document[]>();
   documents: Document[] = [];
+  document: Document;
   maxDocumentId: number;
 
   constructor(private http: HttpClient) {
-    // this.documents = MOCKDOCUMENTS;
-    this.documents = this.documents;
-    this.getDocuments();
-    // this.maxDocumentId = this.getMaxId();
+    // this.getDocuments();
   }
 
-  getDocuments() {
-    // return this.documents.slice();
-    return (
-      this.http
-        .get<Document[]>(
-          // 'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/documents.json'
-          'http://localhost:3000/documents'
-        )
-        .subscribe((documents: Document[]) => {
-          this.documents = documents;
-          // this.maxDocumentId = this.getMaxId();
-          this.documents.sort((a, b) =>
-            a?.name > b?.name ? 1 : b?.name > a?.name ? -1 : 0
-          );
-          this.documentListChangedEvent.next(this.documents.slice());
-        }),
+  getDocuments(): Document[] {
+    this.http
+      .get<Document[]>(
+        'http://localhost:3000/documents'
+      )
+      .subscribe((responseData) => {
+        this.documents = responseData;
+        this.sortAndSend();
+      }),
       (error: any) => {
         console.log('Error: ', error);
-      }
-    );
+      };
+    return this.documents;
   }
 
   getDocument(id: string) {
@@ -58,23 +49,28 @@ export class DocumentsService {
     return maxId;
   }
 
-  addDocument(newDocument: Document) {
-    if (!newDocument) {
+  addDocument(document: Document) {
+    if (!document) {
       return;
     }
 
-    this.maxDocumentId = this.getMaxId();
+    // make sure id of the new Document is empty
+    document.id = '';
 
-    this.maxDocumentId++;
-    // console.log(this.maxDocumentId);
-    newDocument.id = this.maxDocumentId.toString();
-    this.documents.push(newDocument);
-    // const documentsListClone = this.documents.slice();
-    // this.documentListChangedEvent.next(documentsListClone);
-    this.storeDocuments();
-    this.documents.sort((a, b) =>
-      a?.name > b?.name ? 1 : b?.name > a?.name ? -1 : 0
-    );
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    // add to database
+    this.http
+      .post<{ message: string; document: Document }>(
+        'http://localhost:3000/documents',
+        document,
+        { headers: headers }
+      )
+      .subscribe((responseData) => {
+        // add new document to documents
+        this.documents.push(responseData.document);
+        this.sortAndSend();
+      });
   }
 
   updateDocument(originalDocument: Document, newDocument: Document) {
@@ -92,7 +88,7 @@ export class DocumentsService {
 
     // const documentsListClone = this.documents.slice();
     // this.documentListChangedEvent.next(documentsListClone);
-    this.storeDocuments();
+    // this.storeDocuments();
   }
 
   deleteDocument(document: Document) {
@@ -108,22 +104,30 @@ export class DocumentsService {
     this.documents.splice(pos, 1);
     // const documentsListClone = this.documents.slice();
     // this.documentListChangedEvent.next(documentsListClone);
-    this.storeDocuments();
+    // this.storeDocuments();
   }
 
-  storeDocuments() {
-    const documents = JSON.stringify(this.documents);
-    const headers = new HttpHeaders().set('Content-Type', 'application/Json');
-    this.http
-      .put(
-        // 'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/documents.json',
-        'http://127.0.0.1:3000/documents',
-        documents,
-        { headers }
-      )
-      .subscribe(() => {
-        const cloneDocuments = this.documents.slice();
-        this.documentListChangedEvent.next(cloneDocuments);
-      });
+  sortAndSend() {
+    // console.log('Sorting...');
+    this.documents.sort((a, b) =>
+      a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+    );
+    this.documentListChangedEvent.next(this.documents.slice());
   }
+
+  // storeDocuments() {
+  //   const documents = JSON.stringify(this.documents);
+  //   const headers = new HttpHeaders().set('Content-Type', 'application/Json');
+  //   this.http
+  //     .put(
+  //       'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/documents.json',
+  //       // 'http://127.0.0.1:3000/documents',
+  //       documents,
+  //       { headers }
+  //     )
+  //     .subscribe(() => {
+  //       const cloneDocuments = this.documents.slice();
+  //       this.documentListChangedEvent.next(cloneDocuments);
+  //     });
+  // }
 }

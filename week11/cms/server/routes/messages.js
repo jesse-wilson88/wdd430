@@ -2,14 +2,11 @@ var express = require("express");
 var router = express.Router();
 const sequenceGenerator = require("./sequenceGenerator");
 
-// let messages = [];
-
 const Message = require("../models/message");
 
-// The router.get() method is responsible for getting the list of messages in the messages collection
 router.get("/", (req, res, next) => {
   Message.find()
-    .populate('sender')
+    .populate("sender")
     .then((messages) => {
       this.messages = messages;
       res.status(200).json(messages);
@@ -26,6 +23,7 @@ router.get("/:id", (req, res, next) => {
   Message.findOne({
     id: req.params.id,
   })
+    .populate("sender")
     .then((message) => {
       res.status(200).json({
         message: "Message fetched successfully!",

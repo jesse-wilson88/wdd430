@@ -11,6 +11,7 @@ import { ContactsService } from '../contacts/contacts.service';
 export class MessagesService {
   messageChangedEvent = new Subject<Message[]>();
   messages: Message[] = [];
+  message: Message;
   maxMessageId: number;
 
   constructor(
@@ -39,7 +40,6 @@ export class MessagesService {
       )
       .subscribe({
         next: (n) => {
-          this.maxMessageId = this.getMaxId();
           this.messages = n;
           this.messages.sort((a: Message, b: Message) => +a.id - +b.id);
           this.messageChangedEvent.next(this.messages.slice());
@@ -49,15 +49,11 @@ export class MessagesService {
           this.messages;
         },
       });
-    // .subscribe((responseData) => {
-    //   this.messages = responseData;
-    //   this.sortAndSend();
-    // });
     return this.messages;
   }
 
   getMessage(id: string): Message {
-    return this.messages.find((m) => m.id === id);
+    return this.messages.find((message) => message.id === id);
   }
 
   getMaxId(): number {
@@ -72,41 +68,28 @@ export class MessagesService {
     return maxId;
   }
 
-  addMessage(newMessage: Message) {
-    if (!newMessage) {
+  addMessage(message: Message) {
+    if (!message) {
       return;
     }
 
-    this.maxMessageId = this.getMaxId();
-    this.maxMessageId++;
+    // make sure id of the new Message is empty
+    message.id = '';
 
-    newMessage.id = this.maxMessageId.toString();
-    this.messages.push(newMessage);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    // this.storeMessages();
+    // add to database
+    this.http
+      .post<{ message: string; data: Message }>(
+        'http://localhost:3000/messages',
+        message,
+        { headers: headers }
+      )
+      .subscribe((responseData) => {
+        // add new document to documents
+        console.log(responseData);
+        this.messages.push(responseData.data);
+        this.messages = this.getMessages();
+      });
   }
-
-  // sortAndSend() {
-  //   // console.log('Sorting...');
-  //   this.messages.sort((a, b) =>
-  //     a.id > b.id ? 1 : b.id > a.id ? -1 : 0
-  //   );
-  //   this.messageChangedEvent.next(this.messages.slice());
-  // }
-
-  // storeMessages() {
-  //   const messages = JSON.stringify(this.messages);
-  //   const headers = new HttpHeaders().set('Content-Type', 'application/Json');
-  //   this.http
-  //     .put(
-  //       // 'https://ng-cms-project-e0b45-default-rtdb.firebaseio.com/messages.json',
-  //       'http://127.0.0.1:3000/messages',
-  //       messages,
-  //       { headers }
-  //     )
-  //     .subscribe(() => {
-  //       const cloneMessages = this.messages.slice();
-  //       this.messageChangedEvent.next(cloneMessages);
-  //     });
-  // }
 }

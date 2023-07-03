@@ -1,42 +1,32 @@
-[{
-  "_id": ObjectId("649f4d61520fd8eb853f8deb"),
-  "id": "1",
-  "subject": "CIT 366 assignment 1",
-  "msgText": "The grades for this assignment have been posted.",
-  "sender": ObjectId("58c767386f1d58ebc37af1ed"),
-},
-{
-  "_id": ObjectId("649f4d61520fd8eb853f8dec"),
-  "id": "2",
-  "subject": "CIT 366 assignment 3",
-  "msgText": "When is assignment 3 due?",
-  "sender": ObjectId("58c767386f1d58ebc37af1f2"),
-},
-{
-  "_id": ObjectId("649f4d61520fd8eb853f8ded"),
-  "id": "3",
-  "subject": "CIT 366 assignment 3 due date",
-  "msgText": "Assignment 3 is due on Saturday at 11:30 PM.",
-  "sender": ObjectId("58c767386f1d58ebc37af1ed"),
-},
-{
-  "_id": ObjectId("649f4d61520fd8eb853f8dee"),
-  "id": "4",
-  "subject": "Assignment 3 help",
-  "msgText": "Can I meet with you sometime? I need help with assignment 3.",
-  "sender": ObjectId("58c767386f1d58ebc37af1eb"),
-},
-{
-  "_id": ObjectId("649f4d61520fd8eb853f8def"),
-  "id": "5",
-  "subject": "Assignment 3 help",
-  "msgText": "I can meet with you today at 4:00 PM in my office.",
-  "sender": ObjectId("58c767386f1d58ebc37af1ed"),
-},
-{
-  "_id": ObjectId("64a04f2998862ae19634126b"),
-  "id": "101",
-  "subject": "Last Day of Class",
-  "msgText": "All homework needs to be turned in by July 15.",
-  "sender": ObjectId("64a03d7533fe71d1e0d5ac2a"),
-}]
+[
+  {
+    "id": "1",
+    "subject": "CIT 366 assignment 1",
+    "msgText": "The grades for this assignment have been posted.",
+    "sender": "7"
+  },
+  {
+    "id": "2",
+    "subject": "CIT 366 assignment 3",
+    "msgText": "When is assignment 3 due?",
+    "sender": "13"
+  },
+  {
+    "id": "3",
+    "subject": "CIT 366 assignment 3 due date",
+    "msgText": "Assignment 3 is due on Saturday at 11:30 PM.",
+    "sender": "7"
+  },
+  {
+    "id": "4",
+    "subject": "Assignment 3 help",
+    "msgText": "Can I meet with you sometime? I need help with assignment 3.",
+    "sender": "3"
+  },
+  {
+    "id": "5",
+    "subject": "Assignment 3 help",
+    "msgText": "I can meet with you today at 4:00 PM in my office.",
+    "sender": "7"
+  }
+]

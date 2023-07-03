@@ -5,8 +5,7 @@
 		"email": "barzeer@byui.edu",
 		"phone": "208-496-3768",
 		"imageUrl": "../assets/images/barzeer.jpg",
-		"group": [],
-		"__v": 14
+		"group": null
 	},
 	{
 		"_id": ObjectId("58c767386f1d58ebc37af1ea"),
@@ -120,7 +119,7 @@
 		"_id": ObjectId("58c8cbf2ead5414d33ea8beb"),
 		"id": "104",
 		"name": "Programming team",
-		"email": null,
+		"email": "programming@team.edu",
 		"phone": null,
 		"imageUrl": null,
 		"group": [ObjectId("58c767386f1d58ebc37af1e9"), ObjectId("58c767386f1d58ebc37af1eb"), ObjectId("58c767386f1d58ebc37af1ed"), ObjectId("58c767386f1d58ebc37af1f1")],
@@ -130,7 +129,7 @@
 		"_id": ObjectId("58cac74b4690c438e0976b09"),
 		"id": "105",
 		"name": "Database team",
-		"email": null,
+		"email": "database@team.edu",
 		"phone": null,
 		"imageUrl": null,
 		"group": [ObjectId("58c767386f1d58ebc37af1ed"), ObjectId("58c767386f1d58ebc37af1ef"), ObjectId("58c767386f1d58ebc37af1f0")],
@@ -140,19 +139,18 @@
 		"_id": ObjectId("58cac77b4690c438e0976b0a"),
 		"id": "106",
 		"name": "Networking team",
-		"email": null,
+		"email": "networking@team.edu",
 		"phone": null,
 		"imageUrl": null,
 		"group": [ObjectId("58c767386f1d58ebc37af1ea"), ObjectId("58c767386f1d58ebc37af1ee"), ObjectId("58c767386f1d58ebc37af1f2")],
 		"__v": 0
 	},
-   {
-      "_id": ObjectId("64a1c3a21564a927e7d715fd"),
-      "id": "101",
-      "name": "Jesse Wilson",
-      "email": "jesse@wilson.com",
-      "phone": "403-555-4321",
-      "imageUrl": null,
-      "group": null
-   }
+	{
+		"id": "101",
+		"name": "Jesse Wilson",
+		"email": "wil18153@byui.edu",
+		"phone": "403-555-4321",
+		"imageUrl": "",
+		"group": null
+	},
 ]

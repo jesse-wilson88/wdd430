@@ -53,7 +53,6 @@ export class ContactEditComponent implements OnInit {
 
   onCancel() {
     this.router.navigate(['../'], { relativeTo: this.route });
-    // this.router.navigate(['/contacts']);
   }
 
   isInvalidContact(newContact: Contact) {
@@ -79,7 +78,6 @@ export class ContactEditComponent implements OnInit {
   }
 
   addToGroup($event: any) {
-    // console.log('dragging contact');
     const selectedContact: Contact = $event.dragData;
     const invalidGroupContact = this.isInvalidContact(selectedContact);
     if (invalidGroupContact) {

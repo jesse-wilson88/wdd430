@@ -21,7 +21,9 @@ export class MessageEditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.contactService.getContactId('101')
+    this.contactService.getContactId('101').subscribe((response) => {
+      this.currentSender = response.contact;
+    });
   }
 
   onSendMessage() {

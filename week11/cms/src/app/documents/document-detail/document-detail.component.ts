@@ -26,7 +26,6 @@ export class DocumentDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       const id = params['id'];
-      // console.log('ID: ', id);
       this.document = this.documentsService.getDocument(id);
     });
   }
@@ -39,9 +38,6 @@ export class DocumentDetailComponent implements OnInit {
 
   onDelete() {
     this.documentsService.deleteDocument(this.document);
-
-    // Route back to the '/documents' URL
-    // this.router.navigate(['/documents'], { relativeTo: this.route });
     this.router.navigateByUrl('/documents');
   }
 }

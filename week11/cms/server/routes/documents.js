@@ -2,14 +2,11 @@ var express = require("express");
 var router = express.Router();
 const sequenceGenerator = require("./sequenceGenerator");
 
-// let documents = [];
-
 const Document = require("../models/document");
 
 // The router.get() method is responsible for getting the list of documents in the documents collection
 router.get("/", (req, res, next) => {
   Document.find()
-    // .populate("children")
     .then((documents) => {
       this.documents = documents;
       res.status(200).json(documents);
@@ -23,10 +20,9 @@ router.get("/", (req, res, next) => {
 });
 
 router.get("/:id", (req, res, next) => {
-  Document
-    .findOne({
-      id: req.params.id,
-    })
+  Document.findOne({
+    id: req.params.id,
+  })
     .then((document) => {
       res.status(200).json({
         message: "Document fetched successfully!",

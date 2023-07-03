@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, NgForm } from '@angular/forms';
 
@@ -41,7 +41,6 @@ export class DocumentEditComponent implements OnInit {
       this.editMode = true;
 
       this.document = JSON.parse(JSON.stringify(this.originalDocument));
-      // console.log(this.document);
     });
   }
 

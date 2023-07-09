@@ -1,0 +1,19 @@
+<a
+  [routerLink]="album.id"
+  routerLinkActive="active"
+  class="list-group-item clearfix"
+>
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">{{ album?.artist }}</h4>
+    <p class="list-group-item-text">{{ album?.title }}</p>
+  </div>
+  <span class="pull-right">
+    <img
+      [src]="album?.albumCoverUrl"
+      alt="{{ album?.title }}"
+      class="img-responsive"
+      *ngIf="album?.albumCoverUrl"
+      style="max-width: 100px"
+    />
+  </span>
+</a>

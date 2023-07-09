@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading clearfix">
+        <h2>{{ album?.artist }}</h2>
+        <div class="pull-left">
+          <img
+            [src]="album?.albumCoverUrl"
+            alt="{{ album?.album }} album {{ album?.artist }}"
+            class="img-responsive"
+            *ngIf="album?.albumCoverUrl"
+          />
+        </div>
+        <div class="pull-right btn-toolbar">
+          <a [routerLink]="['edit']" class="btn btn-primary">Edit</a>
+          <a (click)="onDelete()" class="btn btn-danger">Delete</a>
+        </div>
+      </div>
+      <div class="panel-default">
+        <div class="class-group-item-heading">
+          Release Date: {{ album?.releaseDate }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">Songs</div>
+      </div>
+    </div>
+  </div>
+</div>

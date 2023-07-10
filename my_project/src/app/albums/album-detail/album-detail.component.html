@@ -5,10 +5,10 @@
         <h2>{{ album?.artist }}</h2>
         <div class="pull-left">
           <img
-            [src]="album?.albumCoverUrl"
+            [src]="album?.coverUrl"
             alt="{{ album?.album }} album {{ album?.artist }}"
             class="img-responsive"
-            *ngIf="album?.albumCoverUrl"
+            *ngIf="album?.coverUrl"
           />
         </div>
         <div class="pull-right btn-toolbar">
@@ -21,9 +21,9 @@
           Release Date: {{ album?.releaseDate }}
         </div>
       </div>
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-xs-12">Songs</div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

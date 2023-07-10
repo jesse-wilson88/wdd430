@@ -6,7 +6,7 @@ const Album = require("../models/album");
 
 router.get("/", (req, res, next) => {
   Album.find()
-    .populate("songs")
+    // .populate("songs")
     .then((albums) => {
       this.albums = albums;
       res.status(200).json({
@@ -26,7 +26,7 @@ router.get("/:id", (req, res, next) => {
   Album.findOne({
     id: req.params.id,
   })
-    .populate("songs")
+    // .populate("songs")
     .then((album) => {
       res.status(200).json({
         message: "Album fetched successfully!",
@@ -48,9 +48,9 @@ router.post("/", (req, res, next) => {
     id: maxAlbumId,
     artist: req.body.artist,
     title: req.body.title,
-    albumCoverUrl: req.body.albumCoverUrl,
+    coverUrl: req.body.coverUrl,
     releaseDate: req.body.releaseDate,
-    songs: req.body.songs,
+    // songs: req.body.songs,
   });
 
   album
@@ -71,13 +71,13 @@ router.post("/", (req, res, next) => {
 
 router.put("/:id", (req, res, next) => {
   Album.findOne({ id: req.params.id })
-    .populate("songs")
+    // .populate("songs")
     .then((album) => {
       album.artist = req.body.artist;
       album.title = req.body.title;
-      album.albumCoverUrl = req.body.albumCoverUrl;
+      album.coverUrl = req.body.coverUrl;
       album.releaseDate = req.body.releaseDate;
-      album.songs = req.body.songs;
+      // album.songs = req.body.songs;
 
       Album.updateOne({ id: req.params.id }, album)
         .then((result) => {
@@ -102,7 +102,7 @@ router.put("/:id", (req, res, next) => {
 
 router.delete("/:id", (req, res, next) => {
   Album.findOne({ id: req.params.id })
-    .populate("songs")
+    // .populate("songs")
     .then((album) => {
       Album.deleteOne({ id: req.params.id })
         .then((result) => {

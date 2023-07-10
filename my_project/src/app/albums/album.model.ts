@@ -4,23 +4,23 @@ export class Album {
   public id: string;
   public artist: string;
   public title: string;
-  public albumCoverUrl: string;
+  public coverUrl: string;
   public releaseDate: string;
-  public songs: Songs[];
+  // public songs: Songs[];
 
   constructor(
     id: string,
     artist: string,
     title: string,
-    albumCoverUrl: string,
-    releaseData: string,
-    songs: Songs[]
+    coverUrl: string,
+    releaseDate: string,
+    // songs: Songs[]
   ) {
     this.id = id;
     this.artist = artist;
     this.title = title;
-    this.albumCoverUrl = albumCoverUrl;
-    this.releaseDate = releaseData;
-    this.songs = songs;
+    this.coverUrl = coverUrl;
+    this.releaseDate = releaseDate;
+    // this.songs = songs;
   }
 }

@@ -11,6 +11,7 @@ import { AlbumItemComponent } from './albums/album-item/album-item.component';
 import { AlbumEditComponent } from './albums/album-edit/album-edit.component';
 import { AlbumDetailComponent } from './albums/album-detail/album-detail.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AlbumsFilterPipe } from './albums/albums-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     AlbumListComponent,
     AlbumItemComponent,
     AlbumEditComponent,
-    AlbumDetailComponent
+    AlbumDetailComponent,
+    AlbumsFilterPipe
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule, HttpClientModule],
   providers: [],

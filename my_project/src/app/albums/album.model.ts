@@ -9,14 +9,16 @@ export class Album {
   public songs: Songs[];
 
   constructor(
+    id: string,
     artist: string,
-    album: string,
+    title: string,
     albumCoverUrl: string,
     releaseData: string,
     songs: Songs[]
   ) {
-    this.id = artist;
-    this.title = album;
+    this.id = id;
+    this.artist = artist;
+    this.title = title;
     this.albumCoverUrl = albumCoverUrl;
     this.releaseDate = releaseData;
     this.songs = songs;

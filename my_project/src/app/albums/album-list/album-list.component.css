@@ -1,3 +1,15 @@
+/* html selectors */
 img {
   border: 1px solid lightgray;
 }
+
+/* class selectors */
+.heading {
+  font-size: 15pt;
+}
+
+.margin-top {
+  margin-top: 10px;
+}
+
+/* id selectors */

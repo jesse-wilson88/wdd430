@@ -10,7 +10,7 @@ import { Album } from './album.model';
 })
 export class AlbumsService {
   albumListChangedEvent = new Subject<Album[]>();
-  private albums: Album[] = [];
+  albums: Album[] = [];
   album: Album;
   maxAlbumId: number;
 
@@ -32,17 +32,11 @@ export class AlbumsService {
   }
 
   getAlbums(): Album[] {
-    // console.log('Gettin the albums');
-    // return this.albums
-    //   .sort((a, b) => (a.artist > b.artist ? 1 : b.artist > b.artist ? -1 : 0))
-    //   .slice();
     this.http
-      .get<{ message: string; album: Album[] }>(
-        'http://127.0.0.1:3000/contacts'
-      )
+      .get<{ message: string; albums: Album[] }>('http://127.0.0.1:3000/albums')
       .pipe(
         map((responseData) => {
-          const albums: Album[] = responseData.album;
+          const albums: Album[] = responseData.albums;
           return albums;
         })
       )
@@ -56,20 +50,33 @@ export class AlbumsService {
     return this.albums;
   }
 
-  getAlbum(id: string): Album | null {
-    return this.albums.find((c) => c.id === id);
+  getAlbum(id: string) {
+    return this.albums.find((album) => album.id === id);
   }
 
-  addAlbum(newAlbum: Album) {
-    if (!newAlbum) {
+  addAlbum(album: Album) {
+    if (!album) {
       return;
     }
 
-    this.maxAlbumId++;
-    newAlbum.id = this.maxAlbumId.toString();
-    this.albums.push(newAlbum);
-    const albumListClone = this.albums.slice();
-    this.albumListChangedEvent.next(albumListClone);
+    // make sure id of the new Album is empty
+    album.id = '';
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    // add to database
+    this.http
+      .post<{ message: string; album: Album }>(
+        'http://localhost:3000/albums',
+        album,
+        { headers: headers }
+      )
+      .subscribe((responseData) => {
+        // add new album to albums
+        this.albums.push(responseData.album);
+        this.sortAndSend();
+        this.getAlbums();
+      });
   }
 
   updateAlbum(originalAlbum: Album, newAlbum: Album) {
@@ -77,16 +84,28 @@ export class AlbumsService {
       return;
     }
 
-    const pos = this.albums.indexOf(originalAlbum);
+    const pos = this.albums.findIndex((d) => d.id === originalAlbum.id);
+
     if (pos < 0) {
       return;
     }
 
+    // set the id of the new Album to the id of the old Album
     newAlbum.id = originalAlbum.id;
-    this.albums[pos] = newAlbum;
+    // newAlbum._id = originalAlbum._id;
 
-    const albumListClone = this.albums.slice();
-    this.albumListChangedEvent.next(albumListClone);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    // update database
+    this.http
+      .put('http://localhost:3000/albums/' + originalAlbum.id, newAlbum, {
+        headers: headers,
+      })
+      .subscribe((response: Response) => {
+        this.albums[pos] = newAlbum;
+        this.sortAndSend();
+        this.getAlbums();
+      });
   }
 
   deleteAlbum(album: Album) {
@@ -94,14 +113,20 @@ export class AlbumsService {
       return;
     }
 
-    const pos = this.albums.indexOf(album);
+    const pos = this.albums.findIndex((d) => d.id === album.id);
+
     if (pos < 0) {
       return;
     }
 
-    this.albums.splice(pos, 1);
-    const albumListClone = this.albums.slice();
-    this.albumListChangedEvent.next(albumListClone);
+    // delete from database
+    this.http
+      .delete('http://localhost:3000/albums/' + album.id)
+      .subscribe((response: Response) => {
+        this.albums.splice(pos, 1);
+        this.sortAndSend();
+        this.getAlbums();
+      });
   }
 
   sortAndSend() {

@@ -23,7 +23,7 @@ SequenceGenerator.prototype.nextId = function (collectionType) {
   var updateObject = {};
   var nextId;
   switch (collectionType) {
-    case "documents":
+    case "albums":
       maxAlbumId++;
       updateObject = { maxAlbumId: maxAlbumId };
       nextId = maxAlbumId;

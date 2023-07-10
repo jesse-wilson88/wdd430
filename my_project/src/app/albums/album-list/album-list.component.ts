@@ -17,15 +17,18 @@ export class AlbumListComponent implements OnInit, OnDestroy {
   constructor(private albumsSerice: AlbumsService) {}
 
   ngOnInit() {
-    this.subscription = this.albumsSerice.albumListChangedEvent.subscribe((albums: Album[]) => {
-      this.albums = albums;
-    })
+    this.subscription = this.albumsSerice.albumListChangedEvent.subscribe(
+      (albums: Album[]) => {
+        this.albums = albums;
+      }
+    );
+    this.albumsSerice.getAlbums();
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-  
+
   search(value: string) {
     this.term = value;
   }

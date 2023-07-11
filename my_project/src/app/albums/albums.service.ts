@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject, map } from 'rxjs';
 
 import { Album } from './album.model';
-// import { MOCKALBUMS } from './MOCKALBUMS';
 
 @Injectable({
   providedIn: 'root',
@@ -14,22 +13,7 @@ export class AlbumsService {
   album: Album;
   maxAlbumId: number;
 
-  constructor(private http: HttpClient) {
-    // this.albums = MOCKALBUMS;
-    // this.maxAlbumId = this.getMaxId();
-  }
-
-  getMaxId() {
-    let maxId = 0;
-
-    for (const albumEl of this.albums) {
-      const currentId = Number(albumEl.id);
-      if (currentId > maxId) {
-        maxId = currentId;
-      }
-    }
-    return maxId;
-  }
+  constructor(private http: HttpClient) {}
 
   getAlbums(): Album[] {
     this.http
@@ -54,6 +38,18 @@ export class AlbumsService {
     return this.albums.find((album) => album.id === id);
   }
 
+  getMaxId(): number {
+    let maxId = 0;
+
+    for (const albumEl of this.albums) {
+      const currentId = Number(albumEl.id);
+      if (currentId > maxId) {
+        maxId = currentId;
+      }
+    }
+    return maxId;
+  }
+
   addAlbum(album: Album) {
     if (!album) {
       return;
@@ -67,7 +63,7 @@ export class AlbumsService {
     // add to database
     this.http
       .post<{ message: string; album: Album }>(
-        'http://localhost:3000/albums',
+        'http://127.0.0.1:3000/albums',
         album,
         { headers: headers }
       )
@@ -98,7 +94,7 @@ export class AlbumsService {
 
     // update database
     this.http
-      .put('http://localhost:3000/albums/' + originalAlbum.id, newAlbum, {
+      .put('http://127.0.0.1:3000/albums/' + originalAlbum.id, newAlbum, {
         headers: headers,
       })
       .subscribe((response: Response) => {
@@ -121,7 +117,7 @@ export class AlbumsService {
 
     // delete from database
     this.http
-      .delete('http://localhost:3000/albums/' + album.id)
+      .delete('http://127.0.0.1:3000/albums/' + album.id)
       .subscribe((response: Response) => {
         this.albums.splice(pos, 1);
         this.sortAndSend();

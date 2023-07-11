@@ -52,24 +52,7 @@ export class AlbumEditComponent implements OnInit {
   onCancel() {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
-
-  // isInvalidAlbum(newAlbum: Album) {
-  //   if (!newAlbum) {
-  //     return (this.invalidAlbum = true);
-  //   }
-
-  //   if (this.album && newAlbum.id === this.album.id) {
-  //     return (this.invalidAlbum = true);
-  //   }
-
-  //   for (let i = 0; i < this.songs.length; i++) {
-  //     if (newAlbum.id === this.songs[i].id) {
-  //       return (this.invalidAlbum = true);
-  //     }
-  //   }
-  //   return (this.invalidAlbum = false);
-  // }
-
+  
   onSubmit(form: NgForm) {
     const value = form.value;
     const newAlbum = new Album(

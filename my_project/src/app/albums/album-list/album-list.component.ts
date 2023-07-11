@@ -14,15 +14,15 @@ export class AlbumListComponent implements OnInit, OnDestroy {
   term: String;
   private subscription: Subscription;
 
-  constructor(private albumsSerice: AlbumsService) {}
+  constructor(private albumsService: AlbumsService) {}
 
   ngOnInit() {
-    this.subscription = this.albumsSerice.albumListChangedEvent.subscribe(
+    this.subscription = this.albumsService.albumListChangedEvent.subscribe(
       (albums: Album[]) => {
         this.albums = albums;
       }
     );
-    this.albumsSerice.getAlbums();
+    this.albumsService.getAlbums();
   }
 
   ngOnDestroy(): void {

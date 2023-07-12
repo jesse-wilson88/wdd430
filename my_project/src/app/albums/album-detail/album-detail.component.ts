@@ -27,6 +27,6 @@ export class AlbumDetailComponent implements OnInit {
 
   onDelete() {
     this.albumsService.deleteAlbum(this.album);
-    this.router.navigateByUrl('/album');
+    this.router.navigateByUrl('/albums');
   }
 }

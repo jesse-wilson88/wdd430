@@ -71,8 +71,8 @@ export class AlbumsService {
         // add new album to albums
         this.albums.push(responseData.album);
         this.sortAndSend();
-        this.getAlbums();
       });
+    this.getAlbums();
   }
 
   updateAlbum(originalAlbum: Album, newAlbum: Album) {
@@ -100,8 +100,9 @@ export class AlbumsService {
       .subscribe((response: Response) => {
         this.albums[pos] = newAlbum;
         this.sortAndSend();
-        this.getAlbums();
       });
+    console.log('Album Deleted');
+    this.getAlbums();
   }
 
   deleteAlbum(album: Album) {
@@ -123,6 +124,7 @@ export class AlbumsService {
         this.sortAndSend();
         this.getAlbums();
       });
+    // this.getAlbums();
   }
 
   sortAndSend() {

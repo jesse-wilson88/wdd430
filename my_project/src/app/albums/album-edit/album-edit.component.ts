@@ -14,7 +14,7 @@ export class AlbumEditComponent implements OnInit {
   originalAlbum: Album;
   album: Album;
   // songs: Album[] = [];
-  editMode = false;
+  editMode: boolean = false;
   id: string;
   // invalidAlbum = false;
 
@@ -35,26 +35,24 @@ export class AlbumEditComponent implements OnInit {
 
       this.originalAlbum = this.albumsService.getAlbum(this.id);
 
-      if (this.originalAlbum) {
+      if (!this.originalAlbum) {
         return;
       }
 
       this.editMode = true;
 
       this.album = JSON.parse(JSON.stringify(this.originalAlbum));
-
-      // if (this.originalAlbum.songs && this.originalAlbum.songs.length > 0) {
-      //   this.songs = JSON.parse(JSON.stringify(this.originalAlbum.songs));
-      // }
     });
   }
 
   onCancel() {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
-  
+
   onSubmit(form: NgForm) {
+    console.log('Editmode: ' + this.editMode);
     const value = form.value;
+
     const newAlbum = new Album(
       '',
       value.artist,

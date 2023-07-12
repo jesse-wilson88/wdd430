@@ -88,7 +88,6 @@ export class AlbumsService {
 
     // set the id of the new Album to the id of the old Album
     newAlbum.id = originalAlbum.id;
-    // newAlbum._id = originalAlbum._id;
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -124,7 +123,6 @@ export class AlbumsService {
         this.sortAndSend();
         this.getAlbums();
       });
-    // this.getAlbums();
   }
 
   sortAndSend() {

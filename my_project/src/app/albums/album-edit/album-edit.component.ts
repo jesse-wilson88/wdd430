@@ -13,10 +13,8 @@ import { AlbumsService } from '../albums.service';
 export class AlbumEditComponent implements OnInit {
   originalAlbum: Album;
   album: Album;
-  // songs: Album[] = [];
   editMode: boolean = false;
   id: string;
-  // invalidAlbum = false;
 
   constructor(
     private albumsService: AlbumsService,

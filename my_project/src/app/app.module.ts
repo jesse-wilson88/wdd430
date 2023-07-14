@@ -13,6 +13,12 @@ import { AlbumsFilterPipe } from './albums/albums-filter.pipe';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { SongsComponent } from './songs/songs.component';
+import { SongListComponent } from './songs/song-list/song-list.component';
+import { SongItemComponent } from './songs/song-item/song-item.component';
+import { SongEditComponent } from './songs/song-edit/song-edit.component';
+import { SongDetailComponent } from './songs/song-detail/song-detail.component';
+import { SongsFilterPipe } from './songs/songs-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,13 @@ import { HttpClientModule } from '@angular/common/http';
     AlbumItemComponent,
     AlbumEditComponent,
     AlbumDetailComponent,
-    AlbumsFilterPipe
+    AlbumsFilterPipe,
+    SongsComponent,
+    SongListComponent,
+    SongItemComponent,
+    SongEditComponent,
+    SongDetailComponent,
+    SongsFilterPipe
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule, HttpClientModule],
   providers: [],

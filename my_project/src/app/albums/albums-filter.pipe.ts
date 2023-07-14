@@ -11,7 +11,7 @@ export class AlbumsFilterPipe implements PipeTransform {
 
     if (term && term.length > 0) {
       filteredAlbums = albums.filter((album: Album) =>
-        album.artist.toLowerCase().includes(term.toLowerCase())
+        album.title.toLowerCase().includes(term.toLowerCase())
       );
     }
     if (filteredAlbums.length < 1) {

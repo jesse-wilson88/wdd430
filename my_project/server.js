@@ -19,7 +19,7 @@ var index = require("./server/routes/app");
 
 // ... ADD CODE TO IMPORT YOUR ROUTING FILES HERE ...
 const albumRoutes = require("./server/routes/albums");
-// const recordRoutes = require("./server/routes/records");
+const songRoutes = require("./server/routes/songs");
 
 var app = express(); // create an instance of express
 
@@ -57,7 +57,7 @@ app.use("/", index);
 
 // ... ADD YOUR CODE TO MAP YOUR URL'S TO ROUTING FILES HERE ...
 app.use("/albums", albumRoutes);
-// app.use("/records", recordRoutes);
+app.use("/songs", songRoutes);
 
 // Tell express to map all other non-defined routes back to the index page
 app.get("*", (req, res) => {

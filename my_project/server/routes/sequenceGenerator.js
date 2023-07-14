@@ -2,7 +2,6 @@ var Sequence = require("../models/sequence");
 
 var maxAlbumId;
 
-
 var sequenceId = "";
 
 function SequenceGenerator() {
@@ -11,8 +10,7 @@ function SequenceGenerator() {
     .then((sequence) => {
       sequenceId = sequence._id;
       maxAlbumId = sequence.maxAlbumId;
-
-
+      maxSongId = sequence.maxSongId;
     })
     .catch((err) => {
       return res.status(500).json({
@@ -31,17 +29,12 @@ SequenceGenerator.prototype.nextId = function (collectionType) {
       updateObject = { maxAlbumId: maxAlbumId };
       nextId = maxAlbumId;
       break;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-     default:
+    case "songs":
+      maxSongId++;
+      updateObject = { maxSongId: maxSongId };
+      nextId = maxSongId;
+      break;
+    default:
       return -1;
   }
   Sequence.updateOne({ _id: sequenceId }, { $set: updateObject })

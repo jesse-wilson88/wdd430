@@ -1,0 +1,15 @@
+<a
+  [routerLink]="song.id"
+  routerLinkActive="active"
+  class="list-group-item clearfix"
+>
+  <div class="pull-left">
+    <h4 *ngIf="song?.artist" class="list-group-item-heading">
+      {{ song?.artist }}
+    </h4>
+    <p *ngIf="song?.artist" class="list-group-item-text">{{ song?.title }}</p>
+    <h4 *ngIf="!song?.artist" class="list-group-item-heading">
+      {{ song?.title }}
+    </h4>
+  </div>
+</a>

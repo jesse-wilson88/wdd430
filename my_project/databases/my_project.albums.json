@@ -1,37 +1,37 @@
 [
-   {
-     "id": "1",
-     "artist": "Queen II",
-     "title": "News Of The World",
-     "coverUrl": "https://dvfnvgxhycwzf.cloudfront.net/media/SharedImage/imageFull/.f10_LS6U/SharedImage-53603.jpg?t=028a5528c4b1edfbc2cc",
-     "releaseDate": "28 Oct 1977"
-   },
-   {
-     "id": "2",
-     "artist": "Bobby Brown",
-     "title": "Don't be Cruel",
-     "coverUrl": "https://upload.wikimedia.org/wikipedia/en/e/ea/Cruelalbum.jpg",
-     "releaseDate": "20 Jun 1988",
-   },
-   {
-     "id": "3",
-     "artist": "TNT",
-     "title": "Tell No Tales",
-     "coverUrl": "https://upload.wikimedia.org/wikipedia/en/9/99/TellNoTales.jpg",
-     "releaseDate": "13 April 1987",
-   },
-   {
-     "id": "4",
-     "artist": "TNT",
-     "title": "Intuition",
-     "coverUrl": "https://upload.wikimedia.org/wikipedia/en/0/00/TNT_Intuition.jpg",
-     "releaseDate": "21 Feb 1989",
-   },
-   {
-     "id": "5",
-     "artist": "Queen",
-     "title": "A Night At The Opera",
-     "coverUrl": "https://dvfnvgxhycwzf.cloudfront.net/media/SharedImage/imageFull/.fEzn8N2T/SharedImage-31099.jpg?t=5faf0bb0ddadcab897ce",
-     "releaseDate": "21 Nov 1975",
-   }
+  {
+    "id": "1",
+    "artist": "Queen II",
+    "title": "News Of The World",
+    "coverUrl": "https://dvfnvgxhycwzf.cloudfront.net/media/SharedImage/imageFull/.f10_LS6U/SharedImage-53603.jpg?t=028a5528c4b1edfbc2cc",
+    "releaseDate": "28 Oct 1977"
+  },
+  {
+    "id": "2",
+    "artist": "Bobby Brown",
+    "title": "Don't be Cruel",
+    "coverUrl": "https://upload.wikimedia.org/wikipedia/en/e/ea/Cruelalbum.jpg",
+    "releaseDate": "20 Jun 1988"
+  },
+  {
+    "id": "3",
+    "artist": "TNT",
+    "title": "Tell No Tales",
+    "coverUrl": "https://upload.wikimedia.org/wikipedia/en/9/99/TellNoTales.jpg",
+    "releaseDate": "13 April 1987"
+  },
+  {
+    "id": "4",
+    "artist": "TNT",
+    "title": "Intuition",
+    "coverUrl": "https://upload.wikimedia.org/wikipedia/en/0/00/TNT_Intuition.jpg",
+    "releaseDate": "21 Feb 1989"
+  },
+  {
+    "id": "5",
+    "artist": "Queen",
+    "title": "A Night At The Opera",
+    "coverUrl": "https://dvfnvgxhycwzf.cloudfront.net/media/SharedImage/imageFull/.fEzn8N2T/SharedImage-31099.jpg?t=5faf0bb0ddadcab897ce",
+    "releaseDate": "21 Nov 1975"
+  }
 ]

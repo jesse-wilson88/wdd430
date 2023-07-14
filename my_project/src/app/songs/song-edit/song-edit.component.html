@@ -21,7 +21,7 @@
       <!-- Song title -->
       <div class="row">
         <div class="col-sm-12 form-group">
-          <label for="title">Title:</label>
+          <label for="title">Song Title:</label>
           <input 
             type="text"
             id="title"
@@ -38,7 +38,7 @@
       <!-- Album title -->
       <div class="row">
         <div class="col-sm-12 form-group">
-          <label for="album">Album:</label>
+          <label for="album">Album Name:</label>
           <input 
             type="text"
             id="album"
@@ -66,6 +66,15 @@
             #videoUrl="ngModel"
           >
         </div>
+      </div>
+
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          (!title.valid && title.touched)
+        "
+      >
+        The song title is required.
       </div>
 
       <div class="row">

@@ -1,12 +1,11 @@
 <div class="panel panel-default">
   <div class="panel-body">
     <form id="album-edit" #f="ngForm" (ngSubmit)="onSubmit(f)">
-
       <!-- Input artist/group name -->
       <div class="row">
         <div class="col-sm-12 form-group">
           <label for="artist">Artist:</label>
-          <input 
+          <input
             type="text"
             id="artist"
             class="form-control required"
@@ -16,14 +15,14 @@
             [ngModel]="album?.artist"
             #artist="ngModel"
             required
-          >
+          />
         </div>
       </div>
       <!-- Album title -->
       <div class="row">
         <div class="col-sm-12 form-group">
-          <label for="title">Title:</label>
-          <input 
+          <label for="title">Album Title:</label>
+          <input
             type="text"
             id="title"
             class="form-control required"
@@ -33,14 +32,14 @@
             [ngModel]="album?.title"
             #title="ngModel"
             required
-          >
+          />
         </div>
       </div>
       <!-- Album cover url -->
       <div class="row">
         <div class="col-sm-12 form-group">
           <label for="coverUrl">Album Cover URL:</label>
-          <input 
+          <input
             type="text"
             id="coverUrl"
             class="form-control"
@@ -49,14 +48,14 @@
             name="coverUrl"
             [ngModel]="album?.coverUrl"
             #coverUrl="ngModel"
-          >
+          />
         </div>
       </div>
       <!-- Album release date -->
       <div class="row">
         <div class="col-sm-12 form-group">
           <label for="releaseDate">Release Date:</label>
-          <input 
+          <input
             type="text"
             id="releaseDate"
             class="form-control"
@@ -65,8 +64,17 @@
             name="releaseDate"
             [ngModel]="album?.releaseDate"
             #releaseDate="ngModel"
-          >
+          />
         </div>
+      </div>
+
+      <div
+        class="alert alert-danger"
+        *ngIf="
+          (!artist.valid && artist.touched) || (!title.valid && title.touched)
+        "
+      >
+        The artist and album title are required.
       </div>
 
       <div class="row">
@@ -74,7 +82,9 @@
           <button class="btn btn-success" type="submit" [disabled]="!f.valid">
             save
           </button>
-          <button class="btn btn-primary" type="button" (click)="onCancel()">Cancel</button>
+          <button class="btn btn-primary" type="button" (click)="onCancel()">
+            Cancel
+          </button>
         </div>
       </div>
     </form>

@@ -17,7 +17,6 @@ function SequenceGenerator() {
         title: "An error occurred",
         error: err,
       });
-      // console.log("An error occurred! Status(500): ", err);
     });
 }
 SequenceGenerator.prototype.nextId = function (collectionType) {

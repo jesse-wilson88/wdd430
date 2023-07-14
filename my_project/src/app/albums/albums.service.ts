@@ -100,7 +100,6 @@ export class AlbumsService {
         this.albums[pos] = newAlbum;
         this.sortAndSend();
       });
-    console.log('Album Deleted');
     this.getAlbums();
   }
 

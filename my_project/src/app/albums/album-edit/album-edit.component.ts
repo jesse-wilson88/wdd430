@@ -48,7 +48,6 @@ export class AlbumEditComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log('Editmode: ' + this.editMode);
     const value = form.value;
 
     const newAlbum = new Album(

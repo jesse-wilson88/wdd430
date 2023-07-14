@@ -48,7 +48,6 @@ export class SongEditComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    console.log('Editmode: ' + this.editMode);
     const value = form.value;
 
     const newSong = new Song(
@@ -58,7 +57,6 @@ export class SongEditComponent implements OnInit {
       value.album,
       value.videoUrl
     );
-    console.log(newSong);
 
     if (this.editMode) {
       this.songsService.updateSong(this.originalSong, newSong);

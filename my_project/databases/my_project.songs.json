@@ -1,0 +1,37 @@
+[
+   {
+     "id": "1",
+     "artist": "Vinnie Vincent Invasion",
+     "title": "Love Kills",
+     "album": "All Systems Go",
+     "videoUrl": "https://www.youtube.com/watch?v=TkAUCWbUpJM&ab_channel=glamdog69"
+   },
+   {
+     "id": "2",
+     "artist": "",
+     "title": "Don't Be Cruel",
+     "album": "Don't Be Cruel",
+     "videoUrl": "https://www.youtube.com/watch?v=pd7dCbEfTs4&ab_channel=BobbyBrownVEVO"
+   },
+   {
+     "id": "3",
+     "artist": "Bruce Willis",
+     "title": "Respect Yourself",
+     "album": "The Return of Bruno",
+     "videoUrl": "https://www.youtube.com/watch?v=UTIjgkp0Xws&ab_channel=GuillermoSoto"
+   },
+   {
+      "id": "4",
+      "artist": "Steve Vai",
+      "title": "Bad Horsie",
+      "album": "",
+      "videoUrl": "https://www.youtube.com/watch?v=h5BrE1Pi5cU&ab_channel=SteveVaiHimself"
+   },
+   {
+      "id": "5",
+      "artist": "Queen",
+      "title": "These Are The Days",
+      "album": "Made In Heaven",
+      "videoUrl": "https://www.youtube.com/watch?v=oB4K0scMysc&ab_channel=QueenOfficial"
+   }
+]
